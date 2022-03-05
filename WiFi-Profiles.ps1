@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Import, export, or delete Wi-Fi profiles from previously connected wireless networks.
 
@@ -23,10 +23,10 @@
 
 .NOTES
     NAME: WiFi-Profiles.ps1
-    VERSION: 2.2
+    VERSION: 2.3
     AUTHOR: Tony Burrows
     EMAIL: scripts@tigerguppy.com
-    LASTEDIT: June 28, 2020
+    LASTEDIT: Feb 18, 2022
 
     VERSION HISTORY
     Created on August 30, 2017
@@ -52,6 +52,9 @@
         Update methods to approved verbs.
         Create ZIP archive when exporting SSIDs.
         Rewrite file load and save dialogs.
+
+    Version 2.3 Feb 18, 2022
+        Fix location so script will default to actual stored path.
 #>
 
 # Check for admin rights
@@ -63,6 +66,8 @@ If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 $Separator = ('-') * 60
+
+$ScriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 function Show-Menu {
     param (
@@ -82,12 +87,11 @@ function Show-Menu {
 
 function Export-SSIDs {
     # Save location dialog box
-    $startLocation = Get-Location
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
     [System.Windows.Forms.Application]::EnableVisualStyles()
     $browse = New-Object System.Windows.Forms.FolderBrowserDialog
     $browse.ShowNewFolderButton = $true
-    $browse.SelectedPath = $startLocation
+    $browse.SelectedPath = $ScriptPath
     $browse.Description = "Select a directory"
 
     $loop = $true
@@ -99,7 +103,7 @@ function Export-SSIDs {
             Set-Location $backupPath
         }
         else {
-            $res = [System.Windows.Forms.MessageBox]::Show("Retry or exit?",
+            $res = [System.Windows.Forms.MessageBox]::Show("Retry or cancel to exit?",
                 "Select a location",
                 [System.Windows.Forms.MessageBoxButtons]::RetryCancel)
             if ($res -eq "Cancel") {
@@ -191,18 +195,17 @@ function Export-SSIDs {
     
     Read-Host -Prompt "Press any key to continue..."
 
-    Set-Location $startLocation
+    Set-Location $ScriptPath
 
 }
 
 function Import-SSIDs {
     # Open location dialog box and set load location
-    $startLocation = Get-Location
     [Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
     [System.Windows.Forms.Application]::EnableVisualStyles()
     $browse = New-Object System.Windows.Forms.FolderBrowserDialog
     $browse.ShowNewFolderButton = $false
-    $browse.SelectedPath = $startLocation
+    $browse.SelectedPath = $ScriptPath
     $browse.Description = "Select a directory"
 
     $loop = $true
@@ -213,7 +216,7 @@ function Import-SSIDs {
             Set-Location $loadPath
         }
         else {
-            $res = [System.Windows.Forms.MessageBox]::Show("Retry or exit?",
+            $res = [System.Windows.Forms.MessageBox]::Show("Retry or cancel to exit?",
                 "Select a location",
                 [System.Windows.Forms.MessageBoxButtons]::RetryCancel)
             if ($res -eq "Cancel") {
@@ -292,7 +295,7 @@ function Import-SSIDs {
 
     Read-Host -Prompt "Press any key to continue..."
     
-    Set-Location $startLocation
+    Set-Location $ScriptPath
 }
 
 function Get-SSIDs {
