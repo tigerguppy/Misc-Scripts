@@ -1,2 +1,2 @@
-# public
-Public scripts and tools
+# Misc Scripts
+Misc scripts and tools
