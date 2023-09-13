@@ -1,3 +1,9 @@
+<#
+https://answers.microsoft.com/en-us/windows/forum/all/windows-temporary-user-profile-temp-issue/5fbefc7c-0b82-4395-bfda-6d7e2ebeacc6
+
+To-Do : Add logic to the removing of the registry keys to prevent the need to start a new user profile. 
+#>
+
 $ContinueLoopMain = $true
 $LoopCounterMain = 0
 $LoopLimit = 10
