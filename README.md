@@ -6,18 +6,20 @@
 
 ### Calculator
 
-https://tony.support/ipcalc
+CalcTool - https://tony.support/calc
+
+IP Subnetting - https://tony.support/ipcalc
 
 ### Password / Pin creation
 
-https://tony.support/password1
+CHBS - https://tony.support/password1
 
-https://tony.support/password2
+xkpasswd - https://tony.support/password2
 
-https://tony.support/password3
+Bitwarden - https://tony.support/password3
 
-https://tony.support/pins
+Random.org - https://tony.support/pins
 
 ### URL Decode / Encode
 
-https://tony.support/urldecode
+URL Encoder - https://tony.support/urldecode
