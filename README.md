@@ -4,13 +4,13 @@
   
 [RMM - Action1](https://action1.com)
 
-### Calculator
+### Calculators
 
 CalcTool - https://tony.support/calc
 
 IP Subnetting - https://tony.support/ipcalc
 
-### Password / Pin creation
+### Passwords / Pin creation
 
 CHBS - https://tony.support/password1
 
