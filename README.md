@@ -1,9 +1,9 @@
 # Misc Scripts and Tools
 ## Quick links
+This page - https://tony.support/readme
+
 [GitHub formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax/)
   
-[RMM - Action1](https://action1.com)
-
 ### Calculators
 
 CalcTool - https://tony.support/calc
