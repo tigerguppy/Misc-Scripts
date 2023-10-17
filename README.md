@@ -1,25 +1,25 @@
 # Misc Scripts and Tools
 ## Quick links
-This page - https://tony.support/tools
+https://tony.support/tools - This page
 
 [GitHub formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax/)
   
 ### Calculators
 
-CalcTool - https://tony.support/calc
+https://tony.support/calc - CalcTool
 
-IP Subnetting - https://tony.support/ipcalc
+https://tony.support/ipcalc - IP Subnetting
 
 ### Passwords / Pin creation
 
-CHBS - https://tony.support/password1
+https://tony.support/password1 - CorrectHorseBatteryStaple.net
 
-xkpasswd - https://tony.support/password2
+https://tony.support/password2 - xkpasswd.net
 
-Bitwarden - https://tony.support/password3
+https://tony.support/password3 - Bitwarden password creator
 
-Random.org - https://tony.support/pins
+https://tony.support/pins - Random.org
 
 ### URL Decode / Encode
 
-URL Encoder - https://tony.support/urldecode
+https://tony.support/urldecode - URL Encoder / Decoder
