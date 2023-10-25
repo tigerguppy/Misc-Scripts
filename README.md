@@ -10,6 +10,10 @@ https://tony.support/calc - CalcTool
 
 https://tony.support/ipcalc - IP Subnetting
 
+### Microsoft Tools
+
+https://tony.support/uninstalloffice - Office removal tool
+
 ### Passwords / Pin creation
 
 https://tony.support/password1 - CorrectHorseBatteryStaple.net
