@@ -20,6 +20,20 @@ https://tony.support/ipcalc - IP Subnetting
 
 https://tony.support/uninstalloffice - Office removal tool
 
+### File & URL scanners
+
+https://analyze.intezer.com/
+
+https://www.virustotal.com/
+
+https://www.hybrid-analysis.com/
+
+https://www.joesandbox.com/
+
+https://www.scamadviser.com/
+
+https://urlscan.io/
+
 ### Passwords / Pin creation
 
 https://tony.support/password1 - CorrectHorseBatteryStaple.net
@@ -30,6 +44,12 @@ https://tony.support/password3 - Bitwarden password creator
 
 https://tony.support/pins - Random.org
 
-### URL Decode / Encode
+### URL Tools
 
 https://tony.support/urldecode - URL Encoder / Decoder
+
+http://multirbl.valli.org/ - Multiple blacklist checker
+
+https://dnsdumpster.com/ - DNS lookup
+
+https://wheregoes.com/ - Redirect checker
