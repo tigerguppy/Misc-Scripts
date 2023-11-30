@@ -58,4 +58,4 @@ https://wheregoes.com/ - Redirect checker
 
 https://mxtoolbox.com/ - Email, domain, & DNS tools
 
-https://www.browserling.com/ - Browser cross testing
+https://www.browserling.com/ - Cross browser testing
