@@ -10,7 +10,7 @@ https://github.com/ChrisTitusTech/winutil - Chris Titus Winutil
   
 ### Calculators
 
-https://tony.support/calc - CalcTool
+https://www.calctool.org/ - Hundreds of calculators
 
 https://tony.support/ipcalc - IP Subnetting
 
@@ -34,22 +34,28 @@ https://urlscan.io/
 
 ### Passwords / Pin creation
 
-https://tony.support/password1 - CorrectHorseBatteryStaple.net
+https://correcthorsebatterystaple.net - CorrectHorseBatteryStaple.net
 
-https://tony.support/password2 - xkpasswd.net
+https://xkpasswd.net - XKCD password generator
 
-https://tony.support/password3 - Bitwarden password creator
+https://bitwarden.com/password-generator/ - Bitwarden password creator
 
-https://tony.support/pins - Random.org
+https://tony.support/pins - Random.org 6 digit pin generator
 
 ### URL Tools
 
 https://dnschecker.org/all-tools.php - Collection of useful network, domain, and IP tools
 
-https://tony.support/urldecode - URL Encoder / Decoder
+https://urldecoder.org - URL Encoder / Decoder
 
 http://multirbl.valli.org/ - Multiple blacklist checker
+
+https://research.domaintools.com/ - Whois lookup
 
 https://dnsdumpster.com/ - DNS lookup
 
 https://wheregoes.com/ - Redirect checker
+
+https://mxtoolbox.com/ - Email, domain, & DNS tools
+
+https://www.browserling.com/ - Browser cross testing
