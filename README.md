@@ -32,6 +32,8 @@ https://www.scamadviser.com/
 
 https://urlscan.io/
 
+https://scanqr.org/ - QR Code reader
+
 ### Passwords / Pin creation
 
 https://correcthorsebatterystaple.net - CorrectHorseBatteryStaple.net
