@@ -50,6 +50,8 @@ https://dnschecker.org/all-tools.php - Collection of useful network, domain, and
 
 https://urldecoder.org - URL Encoder / Decoder
 
+https://linkcleaner.app - URL Cleaner, removes garbage from URL
+
 http://multirbl.valli.org/ - Multiple blacklist checker
 
 https://research.domaintools.com/ - Whois lookup
