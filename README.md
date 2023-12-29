@@ -8,12 +8,6 @@ https://github.com/ChrisTitusTech/winutil - Chris Titus Winutil
 
     irm https://christitus.com/win | iex
   
-### Calculators
-
-https://www.calctool.org/ - Hundreds of calculators
-
-https://tony.support/ipcalc - IP Subnetting
-
 ### Passwords / Pin creation
 
 https://correcthorsebatterystaple.net - CorrectHorseBatteryStaple.net
@@ -25,6 +19,10 @@ https://bitwarden.com/password-generator/ - Bitwarden password creator
 https://tony.support/pins - Random.org 6 digit pin generator
 
 ### Tools
+
+https://www.calctool.org/ - Hundreds of calculators
+
+https://tony.support/ipcalc - IP Subnetting
 
 https://tony.support/uninstalloffice - Office removal tool
 
