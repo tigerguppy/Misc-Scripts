@@ -14,26 +14,6 @@ https://www.calctool.org/ - Hundreds of calculators
 
 https://tony.support/ipcalc - IP Subnetting
 
-### Microsoft Tools
-
-https://tony.support/uninstalloffice - Office removal tool
-
-### File & URL scanners
-
-https://analyze.intezer.com/
-
-https://www.virustotal.com/
-
-https://www.hybrid-analysis.com/
-
-https://www.joesandbox.com/
-
-https://www.scamadviser.com/
-
-https://urlscan.io/
-
-https://scanqr.org/ - QR Code reader
-
 ### Passwords / Pin creation
 
 https://correcthorsebatterystaple.net - CorrectHorseBatteryStaple.net
@@ -44,7 +24,11 @@ https://bitwarden.com/password-generator/ - Bitwarden password creator
 
 https://tony.support/pins - Random.org 6 digit pin generator
 
-### URL Tools
+### Tools
+
+https://tony.support/uninstalloffice - Office removal tool
+
+https://scanqr.org/ - QR Code reader
 
 https://dnschecker.org/all-tools.php - Collection of useful network, domain, and IP tools
 
@@ -65,3 +49,17 @@ https://mxtoolbox.com/ - Email, domain, & DNS tools
 https://www.browserling.com/ - Cross browser testing
 
 https://talosintelligence.com/reputation_center - Cisco Talos IP & Domain Reputation Center
+
+### File & URL scanners
+
+https://analyze.intezer.com/
+
+https://www.virustotal.com/
+
+https://www.hybrid-analysis.com/
+
+https://www.joesandbox.com/
+
+https://www.scamadviser.com/
+
+https://urlscan.io/
