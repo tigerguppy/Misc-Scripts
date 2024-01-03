@@ -36,7 +36,9 @@ https://linkcleaner.app - URL Cleaner, removes garbage from URL
 
 http://multirbl.valli.org/ - Multiple blacklist checker
 
-https://research.domaintools.com/ - Whois lookup
+https://lookup.icann.org/en/lookup - ICANN Whois search
+
+https://research.domaintools.com/ - Whois search
 
 https://dnsdumpster.com/ - DNS lookup
 
