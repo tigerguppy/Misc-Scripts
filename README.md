@@ -20,6 +20,10 @@ https://tony.support/pins - Random.org 6 digit pin generator
 
 ### Tools
 
+https://urldecoder.org - URL Encoder / Decoder
+
+https://linkcleaner.app - URL Cleaner, removes garbage from URL
+
 https://www.calctool.org/ - Hundreds of calculators
 
 https://tony.support/ipcalc - IP Subnetting
@@ -29,10 +33,6 @@ https://tony.support/uninstalloffice - Office removal tool
 https://scanqr.org/ - QR Code reader
 
 https://dnschecker.org/all-tools.php - Collection of useful network, domain, and IP tools
-
-https://urldecoder.org - URL Encoder / Decoder
-
-https://linkcleaner.app - URL Cleaner, removes garbage from URL
 
 http://multirbl.valli.org/ - Multiple blacklist checker
 
