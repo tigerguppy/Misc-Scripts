@@ -64,6 +64,10 @@ https://www.scamadviser.com/
 
 https://urlscan.io/
 
+### Support Tools
+
+https://www.whatismybrowser.com/ - Get browser info & other info
+
 ### Referral links
 
 https://www.idrive.com/p=tigerguppy - iDrive
