@@ -36,6 +36,8 @@ https://linkcleaner.app - URL Cleaner, removes garbage from URL
 
 https://dnschecker.org/all-tools.php - Collection of useful network, domain, and IP tools
 
+https://mxtoolbox.com/ - Email, domain, & DNS tools
+
 https://lookup.icann.org/en/lookup - ICANN Whois search
 
 https://research.domaintools.com/ - Whois search
@@ -43,8 +45,6 @@ https://research.domaintools.com/ - Whois search
 https://dnsdumpster.com/ - DNS lookup
 
 https://wheregoes.com/ - Redirect checker
-
-https://mxtoolbox.com/ - Email, domain, & DNS tools
 
 https://www.browserling.com/ - Cross browser testing
 
