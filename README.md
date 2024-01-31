@@ -54,8 +54,6 @@ http://multirbl.valli.org/ - Multiple blacklist checker
 
 https://www.virustotal.com/ - Malware scan
 
-https://analyze.intezer.com/ - Malware scan
-
 https://www.hybrid-analysis.com/ - Malware scan
 
 https://www.joesandbox.com/ - Malware scan
