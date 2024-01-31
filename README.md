@@ -20,10 +20,6 @@ https://tony.support/pins - Random.org 6 digit pin generator
 
 ### Tools
 
-https://urldecoder.org - URL Encoder / Decoder
-
-https://linkcleaner.app - URL Cleaner, removes garbage from URL
-
 https://www.calctool.org/ - Hundreds of calculators
 
 https://tony.support/ipcalc - IP Subnetting
@@ -32,9 +28,13 @@ https://tony.support/uninstalloffice - Office removal tool
 
 https://scanqr.org/ - QR Code reader
 
-https://dnschecker.org/all-tools.php - Collection of useful network, domain, and IP tools
+### File & URL scanners / tools
 
-http://multirbl.valli.org/ - Multiple blacklist checker
+https://urldecoder.org - URL Encoder / Decoder
+
+https://linkcleaner.app - URL Cleaner, removes garbage from URL
+
+https://dnschecker.org/all-tools.php - Collection of useful network, domain, and IP tools
 
 https://lookup.icann.org/en/lookup - ICANN Whois search
 
@@ -50,19 +50,19 @@ https://www.browserling.com/ - Cross browser testing
 
 https://talosintelligence.com/reputation_center - Cisco Talos IP & Domain Reputation Center
 
-### File & URL scanners
+http://multirbl.valli.org/ - Multiple blacklist checker
 
-https://analyze.intezer.com/
+https://www.virustotal.com/ - Malware scan
 
-https://www.virustotal.com/
+https://analyze.intezer.com/ - Malware scan
 
-https://www.hybrid-analysis.com/
+https://www.hybrid-analysis.com/ - Malware scan
 
-https://www.joesandbox.com/
+https://www.joesandbox.com/ - Malware scan
 
-https://www.scamadviser.com/
+https://www.scamadviser.com/ - Malware scan
 
-https://urlscan.io/
+https://urlscan.io/ - Malware scan
 
 ### Support Tools
 
