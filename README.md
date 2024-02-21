@@ -66,7 +66,11 @@ https://urlscan.io/ - Malware scan
 
 https://www.whatismybrowser.com/ - Get browser info & other info
 
+### Lifecycles
+
 https://endoflife.date/ - Software lifecycle dates
+
+https://learn.microsoft.com/en-us/lifecycle/products/ - Microsoft
 
 ### Referral links
 
