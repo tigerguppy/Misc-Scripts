@@ -66,6 +66,8 @@ https://urlscan.io/ - Malware scan
 
 https://www.whatismybrowser.com/ - Get browser info & other info
 
+https://endoflife.date/ - Software lifecycle dates
+
 ### Referral links
 
 https://www.idrive.com/p=tigerguppy - iDrive
