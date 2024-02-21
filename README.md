@@ -66,6 +66,8 @@ https://urlscan.io/ - Malware scan
 
 https://www.whatismybrowser.com/ - Get browser info & other info
 
+https://tony.support/help - Splashtop SOS (one time remote support)
+
 ### Lifecycles
 
 https://endoflife.date/ - Software lifecycle dates
