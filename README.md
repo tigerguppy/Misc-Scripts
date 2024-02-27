@@ -16,7 +16,7 @@ https://xkpasswd.net - XKCD password generator
 
 https://bitwarden.com/password-generator/ - Bitwarden password creator
 
-https://tony.support/pins - Random.org 6 digit pin generator
+[Random.org](https://www.random.org/integers/?num=100&min=100000&max=999999&col=1&base=10&format=html&rnd=new) - 6 digit pin generator
 
 ### Data Breach
 
