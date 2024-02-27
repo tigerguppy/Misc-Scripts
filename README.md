@@ -8,7 +8,7 @@ https://github.com/ChrisTitusTech/winutil - Chris Titus Winutil
 
     irm https://christitus.com/win | iex
   
-### Passwords / Pin creation
+### Passwords / Pin
 
 https://correcthorsebatterystaple.net - CorrectHorseBatteryStaple.net
 
@@ -17,6 +17,10 @@ https://xkpasswd.net - XKCD password generator
 https://bitwarden.com/password-generator/ - Bitwarden password creator
 
 https://tony.support/pins - Random.org 6 digit pin generator
+
+https://leak-lookup.com/ - Leak lookup
+
+https://haveibeenpwned.com/ - Leaked password lookup
 
 ### Tools
 
