@@ -20,8 +20,6 @@ https://bitwarden.com/password-generator/ - Bitwarden password creator
 
 ### Data Breach
 
-
-
 https://haveibeenpwned.com/ - Leaked password lookup
 
 ### Calculators
@@ -33,6 +31,8 @@ https://jodies.de/ipcalc - IP Subnet Calculator
 ### Microsoft Links
 
 https://aka.ms/SaRA-officeUninstallFromPC - Office Removal Tool
+
+https://github.com/microsoft/aka - Microsoft aka.ms sites
 
 ### Domain, DNS, & URL Tools
 
