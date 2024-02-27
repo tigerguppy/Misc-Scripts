@@ -20,7 +20,7 @@ https://tony.support/pins - Random.org 6 digit pin generator
 
 ### Data Breach
 
-https://leak-lookup.com/ - Leak lookup
+
 
 https://haveibeenpwned.com/ - Leaked password lookup
 
