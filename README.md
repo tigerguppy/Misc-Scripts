@@ -8,7 +8,7 @@ https://github.com/ChrisTitusTech/winutil - Chris Titus Winutil
 
     irm https://christitus.com/win | iex
   
-### Passwords / Pin
+### Passwords & Pins
 
 https://correcthorsebatterystaple.net - CorrectHorseBatteryStaple.net
 
@@ -18,25 +18,31 @@ https://bitwarden.com/password-generator/ - Bitwarden password creator
 
 https://tony.support/pins - Random.org 6 digit pin generator
 
+### Data Breach
+
 https://leak-lookup.com/ - Leak lookup
 
 https://haveibeenpwned.com/ - Leaked password lookup
 
-### Tools
+### Calculators
 
 https://www.calctool.org/ - Hundreds of calculators
 
-https://tony.support/ipcalc - IP Subnetting
+https://jodies.de/ipcalc - IP Subnet Calculator
 
-https://tony.support/uninstalloffice - Office removal tool
+### Microsoft Links
 
-https://scanqr.org/ - QR Code reader
+https://aka.ms/SaRA-officeUninstallFromPC - Office Removal Tool
 
-### File & URL scanners / tools
+### Domain, DNS, & URL Tools
 
 https://urldecoder.org - URL Encoder / Decoder
 
 https://linkcleaner.app - URL Cleaner, removes garbage from URL
+
+https://wheregoes.com/ - Redirect checker
+
+https://scanqr.org/ - QR Code Reader
 
 https://dnschecker.org/all-tools.php - Collection of useful network, domain, and IP tools
 
@@ -48,9 +54,9 @@ https://research.domaintools.com/ - Whois search
 
 https://dnsdumpster.com/ - DNS lookup
 
-https://wheregoes.com/ - Redirect checker
-
 https://www.browserling.com/ - Cross browser testing
+
+### Blacklist & Scan Tools
 
 https://talosintelligence.com/reputation_center - Cisco Talos IP & Domain Reputation Center
 
