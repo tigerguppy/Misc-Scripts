@@ -22,6 +22,12 @@ https://bitwarden.com/password-generator/ - Bitwarden password creator
 
 https://haveibeenpwned.com/ - Leaked password lookup
 
+### Software Lifecycles
+
+https://endoflife.date/ - Software lifecycle dates
+
+https://learn.microsoft.com/en-us/lifecycle/products/ - Microsoft
+
 ### Calculators
 
 https://www.calctool.org/ - Hundreds of calculators
@@ -72,17 +78,17 @@ https://www.scamadviser.com/ - Malware scan
 
 https://urlscan.io/ - Malware scan
 
+### Privacy
+
+https://awesome-privacy.xyz/ - Privacy focused alternatives
+
+https://digital-defense.io/ - Personal privacy checklist
+
 ### Support Tools
 
 https://www.whatismybrowser.com/ - Get browser info & other info
 
 https://tony.support/help - Splashtop SOS (one time remote support)
-
-### Lifecycles
-
-https://endoflife.date/ - Software lifecycle dates
-
-https://learn.microsoft.com/en-us/lifecycle/products/ - Microsoft
 
 ### Referral links
 
