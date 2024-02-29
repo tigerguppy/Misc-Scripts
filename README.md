@@ -3,11 +3,11 @@
 
 ## Quick links
 
-https://tony.support/tools - This page
+[This page](https://tony.support/tools)
 
 [GitHub formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax/)
 
-https://github.com/ChrisTitusTech/winutil - Chris Titus Winutil
+[Chris Titus Winutil](https://github.com/ChrisTitusTech/winutil)
 
     irm https://christitus.com/win | iex
   
@@ -15,11 +15,11 @@ https://github.com/ChrisTitusTech/winutil - Chris Titus Winutil
 
 ## Passwords & Pins
 
-https://correcthorsebatterystaple.net - CorrectHorseBatteryStaple.net
+[CorrectHorseBatteryStaple.net](https://correcthorsebatterystaple.net)
 
-https://xkpasswd.net - XKCD password generator
+[XKCD password generator](https://xkpasswd.net)
 
-https://bitwarden.com/password-generator/ - Bitwarden password creator
+[Bitwarden password creator](https://bitwarden.com/password-generator/)
 
 [Random.org](https://www.random.org/integers/?num=100&min=100000&max=999999&col=1&base=10&format=html&rnd=new) - 6 digit pin generator
 
@@ -27,116 +27,116 @@ https://bitwarden.com/password-generator/ - Bitwarden password creator
 
 ## Data Breach
 
-https://haveibeenpwned.com/ - Leaked password lookup
+[Leaked password lookup](https://haveibeenpwned.com/)
 
 
 
 ## System Lifecycles
 
-https://endoflife.date/ - Software lifecycle dates
+[Software lifecycle dates](https://endoflife.date/)
 
-https://learn.microsoft.com/en-us/lifecycle/products/ - Microsoft software
+[Microsoft software](https://learn.microsoft.com/en-us/lifecycle/products/)
 
-https://learn.microsoft.com/en-us/surface/surface-driver-firmware-lifecycle-support - Microsoft Surface products
+[Microsoft Surface products](https://learn.microsoft.com/en-us/surface/surface-driver-firmware-lifecycle-support)
 
-https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.html - HP supported products
+[HP supported products](https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.html)
 
-https://support.hp.com/us-en/retired-products - HP Retired Products
+[HP Retired Products](https://support.hp.com/us-en/retired-products)
 
-https://en.wikipedia.org/wiki/IOS_version_history - Apple iOS versions
+[Apple iOS versions](https://en.wikipedia.org/wiki/IOS_version_history)
 
-https://en.wikipedia.org/wiki/List_of_iPad_models - Apple iPad models
+[Apple iPad models](https://en.wikipedia.org/wiki/List_of_iPad_models)
 
-https://en.wikipedia.org/wiki/List_of_iPhone_models - Apple iPhone models
+[Apple iPhone models](https://en.wikipedia.org/wiki/List_of_iPhone_models)
 
-https://en.wikipedia.org/wiki/List_of_Mac_models - Apple Mac models
+[Apple Mac models](https://en.wikipedia.org/wiki/List_of_Mac_models)
 
 
 
 ## Product Datasheets
 
-http://h71069.www7.hp.com/quickspecs/overview.html - HP Quickspecs
+[HP Quickspecs](http://h71069.www7.hp.com/quickspecs/overview.html)
 
-https://www.hpe.com/psnow/document-types?doctype=quickspecs&cc=ww&lc=en&f=1&s=1&jumpid=in_qspage-psnow - HPE Quickspecs
+[HPE Quickspecs](https://www.hpe.com/psnow/document-types?doctype=quickspecs&cc=ww&lc=en&f=1&s=1&jumpid=in_qspage-psnow)
 
 
 
 ## Calculators
 
-https://www.calctool.org/ - Hundreds of calculators
+[Hundreds of calculators](https://www.calctool.org/)
 
-https://jodies.de/ipcalc - IP Subnet Calculator
+[IP Subnet Calculator](https://jodies.de/ipcalc)
 
 
 
 ## Microsoft Links
 
-https://aka.ms/SaRA-officeUninstallFromPC - Office Removal Tool
+[Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
 
-https://github.com/microsoft/aka - Microsoft aka.ms sites
+[Microsoft aka.ms sites](https://github.com/microsoft/aka)
 
 
 
 ## Domain, DNS, & URL Tools
 
-https://urldecoder.org - URL Encoder / Decoder
+[URL Encoder / Decoder](https://urldecoder.org)
 
-https://linkcleaner.app - URL Cleaner, removes garbage from URL
+[URL Cleaner, removes garbage from URL](https://linkcleaner.app)
 
-https://wheregoes.com/ - Redirect checker
+[Redirect checker](https://wheregoes.com/)
 
-https://scanqr.org/ - QR Code Reader
+[QR Code Reader](https://scanqr.org/)
 
-https://dnschecker.org/all-tools.php - Collection of useful network, domain, and IP tools
+[Collection of useful network, domain, and IP tools](https://dnschecker.org/all-tools.php)
 
-https://mxtoolbox.com/ - Email, domain, & DNS tools
+[Email, domain, & DNS tools](https://mxtoolbox.com/)
 
-https://lookup.icann.org/en/lookup - ICANN Whois search
+[ICANN Whois search](https://lookup.icann.org/en/lookup)
 
-https://research.domaintools.com/ - Whois search
+[Whois search](https://research.domaintools.com/)
 
-https://dnsdumpster.com/ - DNS lookup
+[DNS lookup](https://dnsdumpster.com/)
 
-https://www.browserling.com/ - Cross browser testing
+[Cross browser testing](https://www.browserling.com/)
 
 
 
 ## Blacklist & Scan Tools
 
-https://talosintelligence.com/reputation_center - Cisco Talos IP & Domain Reputation Center
+[Cisco Talos IP & Domain Reputation Center](https://talosintelligence.com/reputation_center)
 
-http://multirbl.valli.org/ - Multiple blacklist checker
+[Multiple blacklist checker](http://multirbl.valli.org/)
 
-https://www.virustotal.com/ - Malware scan
+[VirusTotal](https://www.virustotal.com/)
 
-https://www.hybrid-analysis.com/ - Malware scan
+[Hybrid Analysis](https://www.hybrid-analysis.com/)
 
-https://www.joesandbox.com/ - Malware scan
+[Joe's Sandbox](https://www.joesandbox.com/)
 
-https://www.scamadviser.com/ - Malware scan
+[Scam Advisor](https://www.scamadviser.com/)
 
-https://urlscan.io/ - Malware scan
+[URL Sscan](https://urlscan.io/)
 
 
 
 ## Privacy
 
-https://awesome-privacy.xyz/ - Privacy focused alternatives
+[Privacy focused alternatives](https://awesome-privacy.xyz/)
 
-https://digital-defense.io/ - Personal privacy checklist
+[Personal privacy checklist](https://digital-defense.io/)
 
 
 
 ## Support Tools
 
-https://www.whatismybrowser.com/ - Get browser info & other info
+[Get browser info & other info](https://www.whatismybrowser.com/)
 
-https://tony.support/help - Splashtop SOS (one time remote support)
+[Splashtop SOS (one time remote support)](https://tony.support/help)
 
 
 
 ## Referral links
 
-https://www.idrive.com/p=tigerguppy - iDrive
+[iDrive](https://www.idrive.com/p=tigerguppy)
 
-https://www.idrive.com/idrive/o/p/tigerguppy/partner90 - iDrive 90% off first year
+[iDrive 90% off first year](https://www.idrive.com/idrive/o/p/tigerguppy/partner90)https://www.idrive.com/idrive/o/p/tigerguppy/partner90
