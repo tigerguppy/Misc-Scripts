@@ -1,66 +1,13 @@
-# Misc Scripts and Tools
+# Misc Scripts, Tools, & Links
 
-
-## Quick links
-
-[This page](https://tony.support/tools)
-
-[GitHub formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax/)
-
-[Chris Titus Winutil](https://github.com/ChrisTitusTech/winutil)
-
-    irm https://christitus.com/win | iex
-  
-
-
-## Passwords & Pins
-
-[CorrectHorseBatteryStaple.net](https://correcthorsebatterystaple.net)
-
-[XKCD password generator](https://xkpasswd.net)
-
-[Bitwarden password creator](https://bitwarden.com/password-generator/)
-
-[6 digit pin generator](https://www.random.org/integers/?num=100&min=100000&max=999999&col=1&base=10&format=html&rnd=new)
-
-
-
-## Data Breach
-
-[Leaked password lookup](https://haveibeenpwned.com/)
-
-
-
-## System Lifecycles
-
-[Software lifecycle dates](https://endoflife.date/)
-
-[Large list of EoL enterprise products](https://www.parkplacetechnologies.com/eosl/)
-
-[Microsoft software](https://learn.microsoft.com/en-us/lifecycle/products/)
-
-[Microsoft Surface products](https://learn.microsoft.com/en-us/surface/surface-driver-firmware-lifecycle-support)
-
-[HP supported products](https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.html)
-
-[HP Retired Products](https://support.hp.com/us-en/retired-products)
-
-[Apple iOS versions](https://en.wikipedia.org/wiki/IOS_version_history)
-
-[Apple iPad models](https://en.wikipedia.org/wiki/List_of_iPad_models)
-
-[Apple iPhone models](https://en.wikipedia.org/wiki/List_of_iPhone_models)
-
-[Apple Mac models](https://en.wikipedia.org/wiki/List_of_Mac_models)
-
-
-
-## Product Datasheets
-
-[HP Quickspecs](http://h71069.www7.hp.com/quickspecs/overview.html)
-
-[HPE Quickspecs](https://www.hpe.com/psnow/document-types?doctype=quickspecs&cc=ww&lc=en&f=1&s=1&jumpid=in_qspage-psnow)
-
+## Blacklist & Scan Tools
+[Cisco Talos IP & Domain Reputation Center](https://talosintelligence.com/reputation_center)
+[Multiple blacklist checker](http://multirbl.valli.org/)
+[VirusTotal](https://www.virustotal.com/)
+[Hybrid Analysis](https://www.hybrid-analysis.com/)
+[Joe's Sandbox](https://www.joesandbox.com/)
+[Scam Advisor](https://www.scamadviser.com/)
+[URL Sscan](https://urlscan.io/)
 
 
 ## Calculators
@@ -71,11 +18,9 @@
 
 
 
-## Microsoft Links
+## Data Breach
 
-[Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
-
-[Microsoft aka.ms sites](https://github.com/microsoft/aka)
+[Leaked password lookup](https://haveibeenpwned.com/)
 
 
 
@@ -103,21 +48,35 @@
 
 
 
-## Blacklist & Scan Tools
+## Microsoft Links
 
-[Cisco Talos IP & Domain Reputation Center](https://talosintelligence.com/reputation_center)
+[Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
 
-[Multiple blacklist checker](http://multirbl.valli.org/)
+[Microsoft aka.ms sites](https://github.com/microsoft/aka)
 
-[VirusTotal](https://www.virustotal.com/)
 
-[Hybrid Analysis](https://www.hybrid-analysis.com/)
 
-[Joe's Sandbox](https://www.joesandbox.com/)
+## Misc. / Random links
 
-[Scam Advisor](https://www.scamadviser.com/)
+[This page](https://tony.support/tools)
 
-[URL Sscan](https://urlscan.io/)
+[GitHub formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax/)
+
+[Media Bias Chart](https://adfontesmedia.com/interactive-media-bias-chart/)
+
+[National Debt Clock](https://www.usdebtclock.org/)
+
+
+
+## Passwords & Pins
+
+[CorrectHorseBatteryStaple.net](https://correcthorsebatterystaple.net)
+
+[XKCD password generator](https://xkpasswd.net)
+
+[Bitwarden password creator](https://bitwarden.com/password-generator/)
+
+[6 digit pin generator](https://www.random.org/integers/?num=100&min=100000&max=999999&col=1&base=10&format=html&rnd=new)
 
 
 
@@ -129,11 +88,11 @@
 
 
 
-## Support Tools
+## Product Datasheets
 
-[Get browser info & other info](https://www.whatismybrowser.com/)
+[HP Quickspecs](http://h71069.www7.hp.com/quickspecs/overview.html)
 
-[Splashtop SOS (one time remote support)](https://tony.support/help)
+[HPE Quickspecs](https://www.hpe.com/psnow/document-types?doctype=quickspecs&cc=ww&lc=en&f=1&s=1&jumpid=in_qspage-psnow)
 
 
 
@@ -143,8 +102,38 @@
 
 [iDrive 90% off first year](https://www.idrive.com/idrive/o/p/tigerguppy/partner90)
 
-## Misc. / Random links
 
-[Media Bias Chart](https://adfontesmedia.com/interactive-media-bias-chart/)
 
-[National Debt Clock](https://www.usdebtclock.org/)
+## Support Tools
+
+[Chris Titus Winutil](https://github.com/ChrisTitusTech/winutil)
+
+    irm https://christitus.com/win | iex
+
+[Get browser info & other info](https://www.whatismybrowser.com/)
+
+[Splashtop SOS (one time remote support)](https://tony.support/help)
+
+
+
+## System Lifecycles
+
+[Software lifecycle dates](https://endoflife.date/)
+
+[Large list of EoL enterprise products](https://www.parkplacetechnologies.com/eosl/)
+
+[Microsoft software](https://learn.microsoft.com/en-us/lifecycle/products/)
+
+[Microsoft Surface products](https://learn.microsoft.com/en-us/surface/surface-driver-firmware-lifecycle-support)
+
+[HP supported products](https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.html)
+
+[HP Retired Products](https://support.hp.com/us-en/retired-products)
+
+[Apple iOS versions](https://en.wikipedia.org/wiki/IOS_version_history)
+
+[Apple iPad models](https://en.wikipedia.org/wiki/List_of_iPad_models)
+
+[Apple iPhone models](https://en.wikipedia.org/wiki/List_of_iPhone_models)
+
+[Apple Mac models](https://en.wikipedia.org/wiki/List_of_Mac_models)
