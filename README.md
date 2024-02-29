@@ -35,6 +35,8 @@
 
 [Software lifecycle dates](https://endoflife.date/)
 
+[Large list of EoL enterprise products](https://www.parkplacetechnologies.com/eosl/)
+
 [Microsoft software](https://learn.microsoft.com/en-us/lifecycle/products/)
 
 [Microsoft Surface products](https://learn.microsoft.com/en-us/surface/surface-driver-firmware-lifecycle-support)
