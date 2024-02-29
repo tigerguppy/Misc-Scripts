@@ -1,13 +1,21 @@
 # Misc Scripts, Tools, & Links
 
 ## Blacklist & Scan Tools
+
 [Cisco Talos IP & Domain Reputation Center](https://talosintelligence.com/reputation_center)
+
 [Multiple blacklist checker](http://multirbl.valli.org/)
+
 [VirusTotal](https://www.virustotal.com/)
+
 [Hybrid Analysis](https://www.hybrid-analysis.com/)
+
 [Joe's Sandbox](https://www.joesandbox.com/)
+
 [Scam Advisor](https://www.scamadviser.com/)
+
 [URL Sscan](https://urlscan.io/)
+
 
 
 ## Calculators
