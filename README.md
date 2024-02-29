@@ -21,7 +21,7 @@
 
 [Bitwarden password creator](https://bitwarden.com/password-generator/)
 
-[Random.org](https://www.random.org/integers/?num=100&min=100000&max=999999&col=1&base=10&format=html&rnd=new) - 6 digit pin generator
+[6 digit pin generator](https://www.random.org/integers/?num=100&min=100000&max=999999&col=1&base=10&format=html&rnd=new)
 
 
 
