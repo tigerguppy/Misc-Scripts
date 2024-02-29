@@ -1,7 +1,8 @@
 # Misc Scripts and Tools
 
 
-### Quick links
+## Quick links
+
 https://tony.support/tools - This page
 
 [GitHub formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax/)
@@ -12,7 +13,7 @@ https://github.com/ChrisTitusTech/winutil - Chris Titus Winutil
   
 
 
-### Passwords & Pins
+## Passwords & Pins
 
 https://correcthorsebatterystaple.net - CorrectHorseBatteryStaple.net
 
@@ -24,13 +25,13 @@ https://bitwarden.com/password-generator/ - Bitwarden password creator
 
 
 
-### Data Breach
+## Data Breach
 
 https://haveibeenpwned.com/ - Leaked password lookup
 
 
 
-### System Lifecycles
+## System Lifecycles
 
 https://endoflife.date/ - Software lifecycle dates
 
@@ -52,7 +53,7 @@ https://en.wikipedia.org/wiki/List_of_Mac_models - Apple Mac models
 
 
 
-### Product Datasheets
+## Product Datasheets
 
 http://h71069.www7.hp.com/quickspecs/overview.html - HP Quickspecs
 
@@ -60,7 +61,7 @@ https://www.hpe.com/psnow/document-types?doctype=quickspecs&cc=ww&lc=en&f=1&s=1&
 
 
 
-### Calculators
+## Calculators
 
 https://www.calctool.org/ - Hundreds of calculators
 
@@ -68,7 +69,7 @@ https://jodies.de/ipcalc - IP Subnet Calculator
 
 
 
-### Microsoft Links
+## Microsoft Links
 
 https://aka.ms/SaRA-officeUninstallFromPC - Office Removal Tool
 
@@ -76,7 +77,7 @@ https://github.com/microsoft/aka - Microsoft aka.ms sites
 
 
 
-### Domain, DNS, & URL Tools
+## Domain, DNS, & URL Tools
 
 https://urldecoder.org - URL Encoder / Decoder
 
@@ -100,7 +101,7 @@ https://www.browserling.com/ - Cross browser testing
 
 
 
-### Blacklist & Scan Tools
+## Blacklist & Scan Tools
 
 https://talosintelligence.com/reputation_center - Cisco Talos IP & Domain Reputation Center
 
@@ -118,7 +119,7 @@ https://urlscan.io/ - Malware scan
 
 
 
-### Privacy
+## Privacy
 
 https://awesome-privacy.xyz/ - Privacy focused alternatives
 
@@ -126,7 +127,7 @@ https://digital-defense.io/ - Personal privacy checklist
 
 
 
-### Support Tools
+## Support Tools
 
 https://www.whatismybrowser.com/ - Get browser info & other info
 
@@ -134,7 +135,7 @@ https://tony.support/help - Splashtop SOS (one time remote support)
 
 
 
-### Referral links
+## Referral links
 
 https://www.idrive.com/p=tigerguppy - iDrive
 
