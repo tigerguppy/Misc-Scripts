@@ -139,10 +139,10 @@
 
 [iDrive](https://www.idrive.com/p=tigerguppy)
 
-[iDrive 90% off first year](https://www.idrive.com/idrive/o/p/tigerguppy/partner90)https://www.idrive.com/idrive/o/p/tigerguppy/partner90
+[iDrive 90% off first year](https://www.idrive.com/idrive/o/p/tigerguppy/partner90)
 
 ## Misc. / Random links
 
-[Media Bias Chart](https://adfontesmedia.com/interactive-media-bias-chart/)https://adfontesmedia.com/interactive-media-bias-chart/
+[Media Bias Chart](https://adfontesmedia.com/interactive-media-bias-chart/)
 
-[National Debt Clock](https://www.usdebtclock.org/)https://www.usdebtclock.org/
+[National Debt Clock](https://www.usdebtclock.org/)
