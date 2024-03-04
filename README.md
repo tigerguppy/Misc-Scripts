@@ -56,6 +56,8 @@
 
 ## Microsoft Links
 
+[Hybrid Config Wizard](https://aka.ms/HybridWizard)
+
 [Microsoft aka.ms sites](https://github.com/microsoft/aka)
 
 [Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
