@@ -62,6 +62,8 @@
 
 [Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
 
+[Update Catalog](https://www.catalog.update.microsoft.com/Home.aspx)
+
 
 
 ## Misc. / Random links
