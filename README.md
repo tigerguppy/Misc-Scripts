@@ -120,7 +120,7 @@
 
     irm https://christitus.com/win | iex
 
-[Get browser info & other info](https://www.whatismybrowser.com/?recipientname=Browser+Report&recipientemail=browserreports@tigerguppy.com#send-to-tech/)
+[Get browser info & other info](https://www.whatismybrowser.com/?recipientname=Browser+Report&recipientemail=browserreports@tigerguppy.com#send-to-tech)
 
 [Splashtop SOS (one time remote support)](https://tony.support/help)
 
