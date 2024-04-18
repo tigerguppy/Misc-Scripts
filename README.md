@@ -22,6 +22,8 @@
 
 [IP Subnet Calculator](https://jodies.de/ipcalc)
 
+[The WinTel Guy](https://wintelguy.com/)
+
 
 
 ## Data Breach
