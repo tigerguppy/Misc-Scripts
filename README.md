@@ -1,5 +1,17 @@
 # Misc Scripts, Tools, & Links
 
+## Abuse reports
+
+[Spamcop - Report Spam emails](https://www.spamcop.net/mcgi)
+
+[Bit.ly link checker](https://support.bitly.com/hc/en-us/p/link-checker)
+
+[Bit.ly abuse form](https://bitly.com/pages/trust/report-abuse)
+
+[Redirect checker](https://wheregoes.com/)
+
+
+
 ## Blacklist & Scan Tools
 
 [Hybrid Analysis](https://www.hybrid-analysis.com/)
