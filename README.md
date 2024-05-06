@@ -76,6 +76,8 @@
 
 [Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
 
+[Support and Recovery Assistant](https://aka.ms/sara)
+
 [Update Catalog](https://www.catalog.update.microsoft.com/Home.aspx)
 
 
