@@ -28,7 +28,9 @@
 
 
 
-## Calculators
+## Calculators & Conversion Tools
+
+[CyberChef](https://gchq.github.io/CyberChef)
 
 [Hundreds of calculators](https://www.calctool.org/)
 
