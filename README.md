@@ -74,7 +74,9 @@
 
 [Hybrid Config Wizard](https://aka.ms/HybridWizard)
 
-[Microsoft aka.ms sites](https://github.com/microsoft/aka)
+[Microsoft aka.ms sites search](https://akasearch.net/)
+
+[Microsoft aka.ms sites (GitHub)](https://github.com/microsoft/aka)
 
 [Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
 
