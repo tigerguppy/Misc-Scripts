@@ -1,4 +1,30 @@
 # Misc Scripts, Tools, & Links
+[Abuse reports](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#abuse-reports)
+
+[Blacklist & Scan Tools](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#blacklist--scan-tools)
+
+[Calculators & Conversion Tools](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#calculators--conversion-tools)
+
+[Data Breach](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#data-breach)
+
+[Domain, DNS, & URL Tools](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#domain-dns--url-tools)
+
+[Microsoft Links](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#microsoft-links)
+
+[Misc. / Random links](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#misc--random-links)
+
+[Passwords & Pins](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#passwords--pins)
+
+[Privacy](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#privacy)
+
+[Product Datasheets](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#product-datasheets)
+
+[Referral links](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#referral-links)
+
+[Support Tools](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#support-tools)
+
+[System Lifecycles](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#system-lifecycles
+
 
 ## Abuse reports
 
