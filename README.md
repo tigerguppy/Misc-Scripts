@@ -23,7 +23,7 @@
 
 [Support Tools](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#support-tools)
 
-[System Lifecycles](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#system-lifecycles
+[System Lifecycles](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#system-lifecycles)
 
 
 ## Abuse reports
