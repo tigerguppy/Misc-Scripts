@@ -58,6 +58,8 @@
 
 [CyberChef](https://gchq.github.io/CyberChef)
 
+[Regex Test](https://regex101.com/)
+
 [Hundreds of calculators](https://www.calctool.org/)
 
 [IP Subnet Calculator](https://jodies.de/ipcalc)
