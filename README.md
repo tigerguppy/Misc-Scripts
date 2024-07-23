@@ -127,6 +127,8 @@
 
 [This page](https://tony.support/tools)
 
+[OSINT Tools](https://start.me/p/L1rEYQ/osint4all)
+
 
 
 ## Passwords & Pins
