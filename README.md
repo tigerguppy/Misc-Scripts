@@ -169,6 +169,8 @@
 
 ## Support Tools
 
+[Show public IP](https://ifconfig.me/ip)
+
 [Chris Titus Winutil](https://github.com/ChrisTitusTech/winutil)
 
     irm https://christitus.com/win | iex
