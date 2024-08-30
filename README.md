@@ -171,6 +171,8 @@
 
 [Show public IP](https://ifconfig.me/ip)
 
+[Connector Pinouts](https://pinoutguide.com/)
+
 [Chris Titus Winutil](https://github.com/ChrisTitusTech/winutil)
 
     irm https://christitus.com/win | iex
