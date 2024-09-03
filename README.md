@@ -105,7 +105,7 @@
 
 [Hybrid Config Wizard](https://aka.ms/HybridWizard)
 
-[Email Header Analyzer](https://mha.azurewebsites.net/)
+[Email Header Analyzer](https://aka.ms/mha)
 
 [Microsoft aka.ms sites search](https://akasearch.net/)
 
