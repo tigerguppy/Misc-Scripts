@@ -111,6 +111,10 @@
 
 [Microsoft aka.ms sites (GitHub)](https://github.com/microsoft/aka)
 
+[Microsoft Support & Recovery Agent (SARA)](https://aka.ms/sara)
+
+[Microsoft Office Activation Troubleshooter](https://aka.ms/SARA-OfficeActivation-OF)
+
 [Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
 
 [Support and Recovery Assistant](https://aka.ms/sara)
