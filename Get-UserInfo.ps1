@@ -58,6 +58,8 @@ Import-Module ActiveDirectory
         Version 2.0.2 2023-08-23
             Add extensionAttributes
             Changed UserProperties to an ArrayList
+        Version 2.0.3 2024-09-16
+            Add BadPwdCount, LastBadPasswordAttempt, & PwdLastSet attributes
 
 .EXAMPLE
     Get-UserInfo
@@ -100,6 +102,9 @@ function Get-UserInfo {
         $UserProperties.Add('OfficePhone') | Out-Null
         $UserProperties.Add('PasswordExpired') | Out-Null
         $UserProperties.Add('PasswordLastSet') | Out-Null
+        $UserProperties.Add('PwdLastSet') | Out-Null
+        $UserProperties.Add('BadPwdCount') | Out-Null
+        $UserProperties.Add('LastBadPasswordAttempt') | Out-Null
         $UserProperties.Add('SamAccountName') | Out-Null
         $UserProperties.Add('Title') | Out-Null
         $UserProperties.Add('WhenChanged') | Out-Null
@@ -117,20 +122,23 @@ function Get-UserInfo {
             $GroupQty = $($UserGroups | Measure-Object).Count
 
             Write-Output $('- ' * 25)
-            Write-Output "Enabled         : $($User.Enabled)"
-            Write-Output "Name            : $($User.Name)"
-            Write-Output "Title           : $($User.Title)"
-            Write-Output "Location        : $($User.Company)"
-            Write-Output "EmailAddress    : $($User.EmailAddress)"
-            Write-Output "PhoneExtension  : $($User.IPPhone)"
-            Write-Output "OfficePhone     : $($User.OfficePhone)"
-            Write-Output "SamAccountName  : $($User.SamAccountName)"
-            Write-Output "Created         : $($User.Created)"
-            Write-Output "WhenCreated     : $($User.WhenChanged)"
-            Write-Output "PasswordLastSet : $($User.PasswordLastSet)"
-            Write-Output "PasswordExpired : $($User.PasswordExpired)"
-            Write-Output "Description     : $($User.Description)"
-            Write-Output "Groups          : $GroupQty"
+            Write-Output "Enabled...............: $($User.Enabled)"
+            Write-Output "Name..................: $($User.Name)"
+            Write-Output "Title.................: $($User.Title)"
+            Write-Output "Location..............: $($User.Company)"
+            Write-Output "EmailAddress..........: $($User.EmailAddress)"
+            Write-Output "PhoneExtension........: $($User.IPPhone)"
+            Write-Output "OfficePhone...........: $($User.OfficePhone)"
+            Write-Output "SamAccountName........: $($User.SamAccountName)"
+            Write-Output "Created...............: $($User.Created)"
+            Write-Output "WhenCreated...........: $($User.WhenChanged)"
+            Write-Output "PasswordLastSet.......: $($User.PasswordLastSet)"
+            Write-Output "PasswordExpired.......: $($User.PasswordExpired)"
+            Write-Output "BadPwdCount.......... : $($User.BadPwdCount)"
+            Write-Output "LastBadPasswordAttempt: $($User.LastBadPasswordAttempt)"
+            Write-Output "PwdLastSet............: $($User.PwdLastSet)"
+            Write-Output "Description...........: $($User.Description)"
+            Write-Output "Groups................: $GroupQty"
             foreach ($Group in $UserGroups) {
                 Write-Output "                  $Group"
             }
