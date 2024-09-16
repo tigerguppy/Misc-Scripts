@@ -140,7 +140,7 @@ function Get-UserInfo {
             Write-Output "Description...........: $($User.Description)"
             Write-Output "Groups................: $GroupQty"
             foreach ($Group in $UserGroups) {
-                Write-Output "                  $Group"
+                Write-Output "                       $Group"
             }
             foreach ($num in 1..15) {
                 $CurrentAttribute = "extensionAttribute$Num"
