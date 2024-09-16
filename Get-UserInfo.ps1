@@ -60,6 +60,7 @@ Import-Module ActiveDirectory
             Changed UserProperties to an ArrayList
         Version 2.0.3 2024-09-16
             Add BadPwdCount, LastBadPasswordAttempt, & PwdLastSet attributes
+            Add options to specifiy a domain controller and/or DistinguishedName
 
 .EXAMPLE
     Get-UserInfo
@@ -81,15 +82,22 @@ function Get-UserInfo {
             Position = 0,
             ValueFromPipeline = $true,
             HelpMessage = 'DisplayName of user')]
-        [string]$DisplayName
+        [string]$DisplayName,
+        [Parameter(
+            Mandatory = $false,
+            Position = 1,
+            ValueFromPipeline = $false,
+            HelpMessage = 'Domain Controller NetBIOS name')]
+        [string]$Server = $(Get-ADDomainController -DomainName $($(Get-ADDomain).Forest) -Discover),
+        [Parameter(
+            Mandatory = $false,
+            Position = 2,
+            ValueFromPipeline = $false,
+            HelpMessage = 'DistinguishedName to search')]
+        [string]$SearchBase = $(Get-ADDomain).DistinguishedName
     )
 
     process {
-
-        $SearchBase = $(Get-ADDomain).DistinguishedName
-        $ServerName = (Get-ADDomainController -DomainName $($(Get-ADDomain).Forest) -Discover).Name
-
-        
         [System.Collections.ArrayList]$UserProperties = @{}
         $UserProperties.Add('Company') | Out-Null
         $UserProperties.Add('Created') | Out-Null
@@ -114,7 +122,7 @@ function Get-UserInfo {
         
         $SearchFilter = "(Name -like '*$DisplayName*')"
 
-        $UserList = Get-ADUser -SearchBase $SearchBase -Properties $UserProperties -Server $ServerName -Filter $SearchFilter | Select-Object $UserProperties | Sort-Object Created -Descending
+        $UserList = Get-ADUser -SearchBase $SearchBase -Properties $UserProperties -Server $Server -Filter $SearchFilter | Select-Object $UserProperties | Sort-Object Created -Descending
 
         foreach ($User in $UserList) {
 
@@ -122,6 +130,7 @@ function Get-UserInfo {
             $GroupQty = $($UserGroups | Measure-Object).Count
 
             Write-Output $('- ' * 25)
+            Write-Output "Server................: $($Server.ToUpper())"
             Write-Output "Enabled...............: $($User.Enabled)"
             Write-Output "Name..................: $($User.Name)"
             Write-Output "Title.................: $($User.Title)"
@@ -136,11 +145,11 @@ function Get-UserInfo {
             Write-Output "PasswordExpired.......: $($User.PasswordExpired)"
             Write-Output "BadPwdCount.......... : $($User.BadPwdCount)"
             Write-Output "LastBadPasswordAttempt: $($User.LastBadPasswordAttempt)"
-            Write-Output "PwdLastSet............: $($User.PwdLastSet)"
+            Write-Output "PwdLastSet............: $(Get-Date $User.PwdLastSet)"
             Write-Output "Description...........: $($User.Description)"
             Write-Output "Groups................: $GroupQty"
             foreach ($Group in $UserGroups) {
-                Write-Output "                       $Group"
+                Write-Output "                        $Group"
             }
             foreach ($num in 1..15) {
                 $CurrentAttribute = "extensionAttribute$Num"
@@ -149,9 +158,9 @@ function Get-UserInfo {
                     continue
                 } else {
                     if ($num -le 9) {
-                        Write-Output "$CurrentAttribute  : $($User.$CurrentAttribute)"
+                        Write-Output "$CurrentAttribute...: $($User.$CurrentAttribute)"
                     } else {
-                        Write-Output "$CurrentAttribute : $($User.$CurrentAttribute)"
+                        Write-Output "$CurrentAttribute..: $($User.$CurrentAttribute)"
                     }    
                 }
             }
