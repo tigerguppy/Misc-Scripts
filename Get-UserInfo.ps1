@@ -61,15 +61,18 @@ Import-Module ActiveDirectory
         Version 2.0.3 2024-09-16
             Add BadPwdCount, LastBadPasswordAttempt, & PwdLastSet attributes
             Add options to specifiy a domain controller and/or DistinguishedName
+        Version 2.0.4 2024-09-17
+            Add options for multiple DCs and 'all' option to search all DCs in the domain.
 
 .EXAMPLE
-    Get-UserInfo
+    Get-UserInfo mike
 
-.INPUTS
-    This script accepts no inputs.
+.EXAMPLE
+    Get-User mike -Servers dc1,dc2
 
-.OUTPUTS
-    This script has no outputs.
+.EXAMPLE
+    Get-User mike -Servers all
+
 #>
 
 #Clear-Host
@@ -88,7 +91,7 @@ function Get-UserInfo {
             Position = 1,
             ValueFromPipeline = $false,
             HelpMessage = 'Domain Controller NetBIOS name')]
-        [string]$Server = $(Get-ADDomainController -DomainName $($(Get-ADDomain).Forest) -Discover),
+        $Servers = $(Get-ADDomainController -Discover).Name,
         [Parameter(
             Mandatory = $false,
             Position = 2,
@@ -98,70 +101,80 @@ function Get-UserInfo {
     )
 
     process {
-        [System.Collections.ArrayList]$UserProperties = @{}
-        $UserProperties.Add('Company') | Out-Null
-        $UserProperties.Add('Created') | Out-Null
-        $UserProperties.Add('Description') | Out-Null
-        $UserProperties.Add('EmailAddress') | Out-Null
-        $UserProperties.Add('Enabled') | Out-Null
-        $UserProperties.Add('IPPhone') | Out-Null
-        $UserProperties.Add('MemberOf') | Out-Null
-        $UserProperties.Add('Name') | Out-Null
-        $UserProperties.Add('OfficePhone') | Out-Null
-        $UserProperties.Add('PasswordExpired') | Out-Null
-        $UserProperties.Add('PasswordLastSet') | Out-Null
-        $UserProperties.Add('PwdLastSet') | Out-Null
-        $UserProperties.Add('BadPwdCount') | Out-Null
-        $UserProperties.Add('LastBadPasswordAttempt') | Out-Null
-        $UserProperties.Add('SamAccountName') | Out-Null
-        $UserProperties.Add('Title') | Out-Null
-        $UserProperties.Add('WhenChanged') | Out-Null
-        foreach ($num in 1..15) {
-            $UserProperties.Add("extensionAttribute$num") | Out-Null
+
+        $Servers = $Servers | Sort-Object
+
+        if ($Servers.ToLower() -eq 'all') {
+            $Servers = $(Get-ADDomainController -Filter * | Sort-Object Name).Name
         }
-        
-        $SearchFilter = "(Name -like '*$DisplayName*')"
 
-        $UserList = Get-ADUser -SearchBase $SearchBase -Properties $UserProperties -Server $Server -Filter $SearchFilter | Select-Object $UserProperties | Sort-Object Created -Descending
+        foreach ($Server in $Servers) {
 
-        foreach ($User in $UserList) {
-
-            $UserGroups = Get-ADUser -Identity $User.SamAccountName -Properties * | Select-Object -ExpandProperty memberof | Get-ADGroup | Sort-Object Name | Select-Object -ExpandProperty Name
-            $GroupQty = $($UserGroups | Measure-Object).Count
-
-            Write-Output $('- ' * 25)
-            Write-Output "Server................: $($Server.ToUpper())"
-            Write-Output "Enabled...............: $($User.Enabled)"
-            Write-Output "Name..................: $($User.Name)"
-            Write-Output "Title.................: $($User.Title)"
-            Write-Output "Location..............: $($User.Company)"
-            Write-Output "EmailAddress..........: $($User.EmailAddress)"
-            Write-Output "PhoneExtension........: $($User.IPPhone)"
-            Write-Output "OfficePhone...........: $($User.OfficePhone)"
-            Write-Output "SamAccountName........: $($User.SamAccountName)"
-            Write-Output "Created...............: $($User.Created)"
-            Write-Output "WhenCreated...........: $($User.WhenChanged)"
-            Write-Output "PasswordLastSet.......: $($User.PasswordLastSet)"
-            Write-Output "PasswordExpired.......: $($User.PasswordExpired)"
-            Write-Output "BadPwdCount.......... : $($User.BadPwdCount)"
-            Write-Output "LastBadPasswordAttempt: $($User.LastBadPasswordAttempt)"
-            Write-Output "PwdLastSet............: $(Get-Date $User.PwdLastSet)"
-            Write-Output "Description...........: $($User.Description)"
-            Write-Output "Groups................: $GroupQty"
-            foreach ($Group in $UserGroups) {
-                Write-Output "                        $Group"
-            }
+            [System.Collections.ArrayList]$UserProperties = @{}
+            $UserProperties.Add('Company') | Out-Null
+            $UserProperties.Add('Created') | Out-Null
+            $UserProperties.Add('Description') | Out-Null
+            $UserProperties.Add('EmailAddress') | Out-Null
+            $UserProperties.Add('Enabled') | Out-Null
+            $UserProperties.Add('IPPhone') | Out-Null
+            $UserProperties.Add('MemberOf') | Out-Null
+            $UserProperties.Add('Name') | Out-Null
+            $UserProperties.Add('OfficePhone') | Out-Null
+            $UserProperties.Add('PasswordExpired') | Out-Null
+            $UserProperties.Add('PasswordLastSet') | Out-Null
+            $UserProperties.Add('PwdLastSet') | Out-Null
+            $UserProperties.Add('BadPwdCount') | Out-Null
+            $UserProperties.Add('LastBadPasswordAttempt') | Out-Null
+            $UserProperties.Add('SamAccountName') | Out-Null
+            $UserProperties.Add('Title') | Out-Null
+            $UserProperties.Add('WhenChanged') | Out-Null
             foreach ($num in 1..15) {
-                $CurrentAttribute = "extensionAttribute$Num"
+                $UserProperties.Add("extensionAttribute$num") | Out-Null
+            }
+        
+            $SearchFilter = "(Name -like '*$DisplayName*')"
 
-                if ($null -eq $User.$CurrentAttribute) {
-                    continue
-                } else {
-                    if ($num -le 9) {
-                        Write-Output "$CurrentAttribute...: $($User.$CurrentAttribute)"
+            $UserList = Get-ADUser -SearchBase $SearchBase -Properties $UserProperties -Server $Server -Filter $SearchFilter | Select-Object $UserProperties | Sort-Object Created -Descending
+
+            foreach ($User in $UserList) {
+
+                $UserGroups = Get-ADUser -Identity $User.SamAccountName -Properties * | Select-Object -ExpandProperty memberof | Get-ADGroup | Sort-Object Name | Select-Object -ExpandProperty Name
+                $GroupQty = $($UserGroups | Measure-Object).Count
+
+                Write-Output $('- ' * 25)
+                Write-Output "Server................: $($Server.ToUpper())"
+                Write-Output "Enabled...............: $($User.Enabled)"
+                Write-Output "Name..................: $($User.Name)"
+                Write-Output "Title.................: $($User.Title)"
+                Write-Output "Location..............: $($User.Company)"
+                Write-Output "EmailAddress..........: $($User.EmailAddress)"
+                Write-Output "PhoneExtension........: $($User.IPPhone)"
+                Write-Output "OfficePhone...........: $($User.OfficePhone)"
+                Write-Output "SamAccountName........: $($User.SamAccountName)"
+                Write-Output "Created...............: $($User.Created)"
+                Write-Output "WhenCreated...........: $($User.WhenChanged)"
+                Write-Output "PasswordLastSet.......: $($User.PasswordLastSet)"
+                Write-Output "PasswordExpired.......: $($User.PasswordExpired)"
+                Write-Output "BadPwdCount.......... : $($User.BadPwdCount)"
+                Write-Output "LastBadPasswordAttempt: $($User.LastBadPasswordAttempt)"
+                Write-Output "PwdLastSet............: $(Get-Date $User.PwdLastSet)"
+                Write-Output "Description...........: $($User.Description)"
+                Write-Output "Groups................: $GroupQty"
+                foreach ($Group in $UserGroups) {
+                    Write-Output "                        $Group"
+                }
+                foreach ($num in 1..15) {
+                    $CurrentAttribute = "extensionAttribute$Num"
+
+                    if ($null -eq $User.$CurrentAttribute) {
+                        continue
                     } else {
-                        Write-Output "$CurrentAttribute..: $($User.$CurrentAttribute)"
-                    }    
+                        if ($num -le 9) {
+                            Write-Output "$CurrentAttribute...: $($User.$CurrentAttribute)"
+                        } else {
+                            Write-Output "$CurrentAttribute..: $($User.$CurrentAttribute)"
+                        }    
+                    }
                 }
             }
         }
