@@ -13,7 +13,7 @@
         2024-09-19
             Add mailbox permission list for non-default permissions.
             Add parameters to limit what is being searched for.
-            
+
     To-Do:
         Run mailboxes in parallel.
 
@@ -21,7 +21,10 @@
     https://tony.support/tools
 
 .EXAMPLE
-    Get-MailboxesWithForwarding -CheckForwardingSmtpAddress
+    Get-MailboxesWithExtras -CheckForwardingSmtpAddress
+
+.EXAMPLE
+    Get-MailboxesWithExtras -CheckAll
 
 .EXAMPLE
     Connect-ExchangeOnline
@@ -40,6 +43,9 @@
 
 .PARAMETER CheckPermissions
     Check mailboxes for additional permissions.
+
+.PARAMETER CheckAll
+    Check all tests.
 
 .AUTHOR
     Tony Burrows
@@ -68,7 +74,12 @@ function Get-MailboxesWithExtras {
             Position = 3, 
             HelpMessage = 'Check mailboxes for additional permissions.', 
             ParameterSetName = 'Default')]
-        [switch]$CheckPermissions = $false
+        [switch]$CheckPermissions = $false,
+        [Parameter(Mandatory = $false, 
+            Position = 3, 
+            HelpMessage = 'Check all options.', 
+            ParameterSetName = 'CheckAll')]
+        [switch]$CheckAll = $false
     )
 
     # Get mailboxes
@@ -82,7 +93,7 @@ function Get-MailboxesWithExtras {
     # Walk through each mailbox
     foreach ($Mailbox in $Mailboxes) {
 
-        if ($CheckForwardingSmtpAddress) {
+        if ($CheckForwardingSmtpAddress -or $CheckAll) {
             # Check for forwarding set by admins
             $ForwardingSmtpAddress = $Mailbox.ForwardingSmtpAddress
             if ($null -eq $ForwardingSmtpAddress) {
@@ -93,13 +104,13 @@ function Get-MailboxesWithExtras {
                     DisplayName       = $Mailbox.DisplayName
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'ForwardingSmtpAddress'
-                    Description       = $ForwardingSmtpAddress
+                    Description       = $ForwardingSmtpAddress -replace "smtp:"
                 }
                 $Output.Add($Obj) | Out-Null
             }
         } # End CheckForwardingSmtpAddress
 
-        if ($CheckForwardingAddress) {
+        if ($CheckForwardingAddress -or $CheckAll) {
             $ForwardingAddress = $Mailbox.ForwardingAddress
             if ($null -eq $ForwardingAddress) {
                 # ForwardingAddress not enabled
@@ -109,13 +120,13 @@ function Get-MailboxesWithExtras {
                     DisplayName       = $Mailbox.DisplayName
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'ForwardingAddress'
-                    Description       = $ForwardingAddress
+                    Description       = $ForwardingAddress -replace "smtp:"
                 }
                 $Output.Add($Obj) | Out-Null
             }
         } # End CheckForwardingAddress
 
-        if ($CheckMailboxRules) {
+        if ($CheckMailboxRules -or $CheckAll) {
             # Get user's mailbox rules
             $Rules = Get-InboxRule -Mailbox $Mailbox.UserPrincipalName
             $RulesQty = $Rules.Count
@@ -138,9 +149,9 @@ function Get-MailboxesWithExtras {
                     }
                 }
             }
-        }
+        } # End CheckMailboxRules
 
-        if ($CheckPermissions) {
+        if ($CheckPermissions -or $CheckAll) {
             # Mailbox permissions that aren't self
             $MailboxPermissions = Get-MailboxPermission -Identity $Mailbox.UserPrincipalName | Where-Object User -Match '@'
             foreach ($MailboxPermission in $MailboxPermissions) {
@@ -148,11 +159,11 @@ function Get-MailboxesWithExtras {
                     DisplayName       = $Mailbox.DisplayName
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'Permission'
-                    Description       = $MailboxPermission.User
+                    Description       = "$($MailboxPermission.User) - $($MailboxPermission.AccessRights)"
                 }
                 $Output.Add($Obj) | Out-Null
             }
-        }
+        } # End CheckPermissions
 
         # Update mailboxes progress bar
         $MailboxesCurrentCount ++
@@ -173,7 +184,7 @@ function Get-MailboxesWithExtras {
 } # End Get-MailboxesWithForwarding
 
 Connect-ExchangeOnline
-$ForwardingItems = Get-MailboxesWithExtras -CheckForwardingSmtpAddress -CheckForwardingAddress -CheckMailboxRules -CheckPermissions
+$ForwardingItems = Get-MailboxesWithExtras -CheckForwardingSmtpAddress -CheckForwardingAddress
 Disconnect-ExchangeOnline -Confirm:$false
 
 $ForwardingItems | Format-Table -AutoSize -Wrap
