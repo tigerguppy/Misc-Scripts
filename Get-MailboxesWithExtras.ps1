@@ -18,17 +18,17 @@
         Run mailboxes in parallel.
 
 .LINK
-    https://tony.support/tools
+    https://github.com/tigerguppy/Misc-Scripts/edit/main/Get-MailboxesWithExtras.ps1
 
 .EXAMPLE
-    Get-MailboxesWithExtras -CheckForwardingSmtpAddress
+    Get-MailboxesWithExtras -CheckForwardingSmtpAddress -CheckMailboxRules
 
 .EXAMPLE
     Get-MailboxesWithExtras -CheckAll
 
 .EXAMPLE
     Connect-ExchangeOnline
-    $ForwardingItems = Get-MailboxesWithExtras -CheckForwardingSmtpAddress -CheckForwardingAddress -CheckMailboxRules -CheckPermissions
+    $ForwardingItems = Get-MailboxesWithExtras -CheckAll
     $Items | Format-Table -AutoSize -Wrap
     Disconnect-ExchangeOnline -Confirm:$false
 
@@ -182,9 +182,3 @@ function Get-MailboxesWithExtras {
     Write-Progress -Id 0 -Activity 'Mailboxes' -Completed
     return $Output
 } # End Get-MailboxesWithForwarding
-
-Connect-ExchangeOnline
-$ForwardingItems = Get-MailboxesWithExtras -CheckForwardingSmtpAddress -CheckForwardingAddress
-Disconnect-ExchangeOnline -Confirm:$false
-
-$ForwardingItems | Format-Table -AutoSize -Wrap
