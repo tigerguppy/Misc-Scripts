@@ -181,4 +181,4 @@ function Get-MailboxesWithExtras {
     # Function clean up
     Write-Progress -Id 0 -Activity 'Mailboxes' -Completed
     return $Output
-} # End Get-MailboxesWithForwarding
+} # End Get-MailboxesWithExtras 
