@@ -52,7 +52,7 @@ Import-Module ActiveDirectory
         Version 2.0.0 2023-08-11
             Add list of user groups for individual user lookups
             Removed bulk listing option due to restructure of script and changing its overall purpose
-            Changed output from objects to console text
+            Changed output from objects to console
         Version 2.0.1 2023-08-16
             Add PasswordExpired & SamAccountName to output
         Version 2.0.2 2023-08-23
@@ -61,18 +61,16 @@ Import-Module ActiveDirectory
         Version 2.0.3 2024-09-16
             Add BadPwdCount, LastBadPasswordAttempt, & PwdLastSet attributes
             Add options to specifiy a domain controller and/or DistinguishedName
-        Version 2.0.4 2024-09-17
-            Add options for multiple DCs and 'all' option to search all DCs in the domain.
+        Version 2.0.4 2024-09-20
+            Add AccountLockoutTime & LockedOut attributes
 
 .EXAMPLE
+    Get user infomation from the primary server for all users with mike in their display name.
     Get-UserInfo mike
 
 .EXAMPLE
-    Get-User mike -Servers dc1,dc2
-
-.EXAMPLE
-    Get-User mike -Servers all
-
+    Get user infomation from all servers for all users with mike in their display name.
+    Get-UserInfo -DisplayName mike -Servers all
 #>
 
 #Clear-Host
@@ -125,6 +123,8 @@ function Get-UserInfo {
             $UserProperties.Add('PwdLastSet') | Out-Null
             $UserProperties.Add('BadPwdCount') | Out-Null
             $UserProperties.Add('LastBadPasswordAttempt') | Out-Null
+            $UserProperties.Add('LockedOut') | Out-Null
+            $UserProperties.Add('AccountLockoutTime') | Out-Null
             $UserProperties.Add('SamAccountName') | Out-Null
             $UserProperties.Add('Title') | Out-Null
             $UserProperties.Add('WhenChanged') | Out-Null
@@ -157,6 +157,8 @@ function Get-UserInfo {
                 Write-Output "PasswordExpired.......: $($User.PasswordExpired)"
                 Write-Output "BadPwdCount.......... : $($User.BadPwdCount)"
                 Write-Output "LastBadPasswordAttempt: $($User.LastBadPasswordAttempt)"
+                Write-Output "AccountLockoutTime....: $($User.AccountLockoutTime)"
+                Write-Output "LockedOut.............: $($User.LockedOut)"
                 Write-Output "PwdLastSet............: $(Get-Date $User.PwdLastSet)"
                 Write-Output "Description...........: $($User.Description)"
                 Write-Output "Groups................: $GroupQty"
