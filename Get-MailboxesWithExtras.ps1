@@ -1,56 +1,36 @@
 <#
 .SYNOPSIS
-    Looks for mailboxes with forwarding enabled or mailbox rules with forwarding or mailboxes with extra permissions in Exchange Online.
+    Identifies Exchange Online mailboxes with forwarding enabled, mailbox rules with forwarding, or non-default mailbox permissions.
+
 .DESCRIPTION
-    Looks for mailboxes with forwarding enabled or mailbox rules with forwarding or mailboxes with extra permissions in Exchange Online.
-.NOTES
-    Assumes ExchangeOnline module is already installed and you're connected to EXO.
-    Connects to Exchange Online, gets a list of all the mailboxes, checks them for admin forwarding or Outlook rule forwarding, logs out of Exchange Online, then lists the results.
+    This script connects to Exchange Online and checks for mailboxes with forwarding configurations, mailbox rules with forwarding, and additional permissions. It logs the results and disconnects from the session.
 
-    Revision history:
-        2024-09-18
-            Intital release
-        2024-09-19
-            Add mailbox permission list for non-default permissions.
-            Add parameters to limit what is being searched for.
+.PARAMETER CheckForwardingSmtpAddress
+    Checks mailboxes for the `ForwardingSmtpAddress` property.
 
-    To-Do:
-        Run mailboxes in parallel.
+.PARAMETER CheckForwardingAddress
+    Checks mailboxes for the `ForwardingAddress` property.
 
-.LINK
-    https://github.com/tigerguppy/Misc-Scripts/edit/main/Get-MailboxesWithExtras.ps1
+.PARAMETER CheckMailboxRules
+    Checks mailbox rules for forwarding configurations.
 
-.EXAMPLE
-    Get-MailboxesWithExtras -CheckForwardingSmtpAddress -CheckMailboxRules
+.PARAMETER CheckPermissions
+    Identifies non-default mailbox permissions.
+
+.PARAMETER CheckAll
+    Runs all checks (forwarding, rules, permissions).
 
 .EXAMPLE
     Get-MailboxesWithExtras -CheckAll
 
-.EXAMPLE
-    Connect-ExchangeOnline
-    $MailboxesWithExtras = Get-MailboxesWithExtras -CheckAll
-    Disconnect-ExchangeOnline -Confirm:$false
-    $MailboxesWithExtras | Sort-Object Description,DisplayName | Format-Table -AutoSize -Wrap
-
-.PARAMETER CheckForwardingSmtpAddress
-    Check mailboxes for ForwardingSmtpAddress.
-
-.PARAMETER CheckForwardingAddress
-    Check mailboxes for ForwardingSmtpAddress.
-
-.PARAMETER CheckMailboxRules
-    Check mailboxes for mailbox rules with forwarding enabled.
-
-.PARAMETER CheckPermissions
-    Check mailboxes for additional permissions.
-
-.PARAMETER CheckAll
-    Check all tests.
-
-.AUTHOR
-    Tony Burrows
-    script@tigerguppy.com
+.NOTES
+    Author: Tony Burrows
+    Version: 2.0.0 (2024-09-20)
+    Added permission checks and various mailbox-related forwardings.
 #>
+
+# Script logic starts here
+
 
 function Get-MailboxesWithExtras {
     [cmdletbinding()]
@@ -182,3 +162,8 @@ function Get-MailboxesWithExtras {
     Write-Progress -Id 0 -Activity 'Mailboxes' -Completed
     return $Output
 } # End Get-MailboxesWithExtras 
+
+Connect-ExchangeOnline
+$MailboxesWithExtras = Get-MailboxesWithExtras -CheckAll
+Disconnect-ExchangeOnline -Confirm:$false
+$MailboxesWithExtras | Sort-Object Description,DisplayName | Format-Table -AutoSize -Wrap
