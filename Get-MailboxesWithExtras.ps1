@@ -28,9 +28,9 @@
 
 .EXAMPLE
     Connect-ExchangeOnline
-    $ForwardingItems = Get-MailboxesWithExtras -CheckAll
-    $Items | Format-Table -AutoSize -Wrap
+    $MailboxesWithExtras = Get-MailboxesWithExtras -CheckAll
     Disconnect-ExchangeOnline -Confirm:$false
+    $MailboxesWithExtras | Sort-Object Description,DisplayName | Format-Table -AutoSize -Wrap
 
 .PARAMETER CheckForwardingSmtpAddress
     Check mailboxes for ForwardingSmtpAddress.
