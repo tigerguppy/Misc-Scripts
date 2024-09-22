@@ -1,36 +1,51 @@
 <#
 .SYNOPSIS
-    Identifies Exchange Online mailboxes with forwarding enabled, mailbox rules with forwarding, or non-default mailbox permissions.
+    Retrieves mailbox information, including forwarding addresses, mailbox rules, and permissions.
 
 .DESCRIPTION
-    This script connects to Exchange Online and checks for mailboxes with forwarding configurations, mailbox rules with forwarding, and additional permissions. It logs the results and disconnects from the session.
+    This function checks Exchange mailboxes for specific properties such as ForwardingSmtpAddress, 
+    ForwardingAddress, mailbox rules with forwarding enabled, and additional permissions. 
+    It allows output customization (console, file, or object) and supports detailed mailbox 
+    processing progress.
 
 .PARAMETER CheckForwardingSmtpAddress
-    Checks mailboxes for the `ForwardingSmtpAddress` property.
+    Checks if a ForwardingSmtpAddress is configured for the mailbox.
 
 .PARAMETER CheckForwardingAddress
-    Checks mailboxes for the `ForwardingAddress` property.
+    Checks if a ForwardingAddress is configured for the mailbox.
 
 .PARAMETER CheckMailboxRules
-    Checks mailbox rules for forwarding configurations.
+    Checks for mailbox rules with forwarding enabled.
 
 .PARAMETER CheckPermissions
-    Identifies non-default mailbox permissions.
+    Checks if the mailbox has additional permissions granted to other users.
 
 .PARAMETER CheckAll
-    Runs all checks (forwarding, rules, permissions).
+    Checks all the options: ForwardingSmtpAddress, ForwardingAddress, Mailbox Rules, and Permissions.
+
+.PARAMETER OutputOption
+    Specifies the output method: Console, File, or Object. The default is Object.
+
+.PARAMETER OutputPath
+    Specifies the directory to save the output file if 'File' is selected as the output option. 
+    Default is the system's Temp directory.
+
+.PARAMETER OutputFileName
+    Specifies the name of the output file. If not provided, a timestamped filename is generated.
 
 .EXAMPLE
-    Get-MailboxesWithExtras -CheckAll
+    Get-MailboxesWithExtras -CheckAll -OutputOption 'File' -OutputPath 'C:\Logs' -OutputFileName 'Mailboxes.txt'
+    Retrieves all mailboxes with forwarding and permission information and outputs the result to a file.
+
+.EXAMPLE
+    Get-MailboxesWithExtras -CheckForwardingSmtpAddress -OutputOption 'Console'
+    Checks mailboxes for ForwardingSmtpAddress and outputs the result to the console.
 
 .NOTES
     Author: Tony Burrows
-    Version: 2.0.0 (2024-09-20)
-    Added permission checks and various mailbox-related forwardings.
+    Version: 2.1.0 (2024-09-22)
+        Added output options
 #>
-
-# Script logic starts here
-
 
 function Get-MailboxesWithExtras {
     [cmdletbinding()]
@@ -40,26 +55,61 @@ function Get-MailboxesWithExtras {
             HelpMessage = 'Check mailboxes for ForwardingSmtpAddress.', 
             ParameterSetName = 'Default')]
         [switch]$CheckForwardingSmtpAddress,
+
         [Parameter(Mandatory = $false, 
             Position = 1,
             HelpMessage = 'Check mailboxes for ForwardingSmtpAddress.', 
             ParameterSetName = 'Default')]
         [switch]$CheckForwardingAddress,
+        
         [Parameter(Mandatory = $false, 
             Position = 2, 
             HelpMessage = 'Check mailboxes for mailbox rules with forwarding enabled.', 
             ParameterSetName = 'Default')]
         [switch]$CheckMailboxRules,
+        
         [Parameter(Mandatory = $false, 
             Position = 3, 
             HelpMessage = 'Check mailboxes for additional permissions.', 
             ParameterSetName = 'Default')]
         [switch]$CheckPermissions = $false,
+        
         [Parameter(Mandatory = $false, 
-            Position = 3, 
+            Position = 0, 
             HelpMessage = 'Check all options.', 
             ParameterSetName = 'CheckAll')]
-        [switch]$CheckAll = $false
+        [switch]$CheckAll = $false,
+        
+        [Parameter(Mandatory = $False,
+            Position = 4,
+            HelpMessage = 'Output options.',
+            ParameterSetName = 'Default')]
+        [Parameter(Mandatory = $False,
+            Position = 1,
+            HelpMessage = 'Output options.',
+            ParameterSetName = 'CheckAll')]
+        [ValidateSet('Console', 'File', 'Object')]
+        [string]$OutputOption = 'Object',
+
+        [Parameter(Mandatory = $False,
+            Position = 5,
+            HelpMessage = 'Output path.',
+            ParameterSetName = 'Default')]
+        [Parameter(Mandatory = $False,
+            Position = 2,
+            HelpMessage = 'Output path.',
+            ParameterSetName = 'CheckAll')]
+        [string]$OutputPath = "$env:SystemDrive\Temp",
+
+        [Parameter(Mandatory = $False,
+            Position = 6,
+            HelpMessage = 'Output filename.',
+            ParameterSetName = 'Default')]
+        [Parameter(Mandatory = $False,
+            Position = 3,
+            HelpMessage = 'Output filename.',
+            ParameterSetName = 'CheckAll')]
+        [string]$OutputFileName = $null
     )
 
     # Get mailboxes
@@ -68,7 +118,7 @@ function Get-MailboxesWithExtras {
     $MailboxesCurrentCount = 0
 
     # New array for returning objects
-    [System.Collections.ArrayList]$Output = [System.Collections.ArrayList]::new()
+    [System.Collections.ArrayList]$ReturnList = [System.Collections.ArrayList]::new()
 
     # Walk through each mailbox
     foreach ($Mailbox in $Mailboxes) {
@@ -84,9 +134,9 @@ function Get-MailboxesWithExtras {
                     DisplayName       = $Mailbox.DisplayName
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'ForwardingSmtpAddress'
-                    Description       = $ForwardingSmtpAddress -replace "smtp:"
+                    Description       = $ForwardingSmtpAddress -replace 'smtp:'
                 }
-                $Output.Add($Obj) | Out-Null
+                $ReturnList.Add($Obj) | Out-Null
             }
         } # End CheckForwardingSmtpAddress
 
@@ -100,9 +150,9 @@ function Get-MailboxesWithExtras {
                     DisplayName       = $Mailbox.DisplayName
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'ForwardingAddress'
-                    Description       = $ForwardingAddress -replace "smtp:"
+                    Description       = $ForwardingAddress -replace 'smtp:'
                 }
-                $Output.Add($Obj) | Out-Null
+                $ReturnList.Add($Obj) | Out-Null
             }
         } # End CheckForwardingAddress
 
@@ -125,7 +175,7 @@ function Get-MailboxesWithExtras {
                             Type              = 'MailboxRule'
                             Description       = $Rule.Name
                         }
-                        $Output.Add($Obj) | Out-Null
+                        $ReturnList.Add($Obj) | Out-Null
                     }
                 }
             }
@@ -141,7 +191,7 @@ function Get-MailboxesWithExtras {
                     Type              = 'Permission'
                     Description       = "$($MailboxPermission.User) - $($MailboxPermission.AccessRights)"
                 }
-                $Output.Add($Obj) | Out-Null
+                $ReturnList.Add($Obj) | Out-Null
             }
         } # End CheckPermissions
 
@@ -160,10 +210,47 @@ function Get-MailboxesWithExtras {
 
     # Function clean up
     Write-Progress -Id 0 -Activity 'Mailboxes' -Completed
-    return $Output
-} # End Get-MailboxesWithExtras 
 
-Connect-ExchangeOnline
-$MailboxesWithExtras = Get-MailboxesWithExtras -CheckAll
-Disconnect-ExchangeOnline -Confirm:$false
-$MailboxesWithExtras | Sort-Object Description,DisplayName | Format-Table -AutoSize -Wrap
+    switch ($OutputOption) {
+        'Console' { $ReturnList | Sort-Object Description, DisplayName | Format-Table -AutoSize -Wrap }
+        'File' {
+
+            # Remove \ if it's at the end of the path
+            if ($OutputPath.Trim()[$OutputPath.Length - 1] -eq '\') {
+                $OutputPath = $OutputPath.Trim('\')
+            }
+
+            if (Test-Path "$OutputPath") {
+                # path exists, continuing
+            } else {
+                try {
+                    New-Item -Path "$OutputPath" -ItemType Directory -Force -ErrorAction Stop | Out-Null
+                } catch {
+                    Write-Output "Unable to create $OutputPath"
+                }
+            }
+
+            if ($null -eq $OutputFileName) {
+                $TimeStamp = $(Get-Date -Format yyyyMMdd-HHmmss)
+                $OutputFileName = "Mailboxes-$($TimeStamp).txt"
+            }
+            
+            $OutputFullPath = "$OutputPath\$OutputFileName"
+
+            if (Test-Path "$OutputFullPath") {
+                # Path exists, continuing
+            } else {
+                try {
+                    New-Item -Path $OutputPath -Name $OutputFileName -ItemType File -Force -ErrorAction Stop | Out-Null
+                } catch {
+                    Write-Output "Unable to create $OutputFullPath"
+                }
+            }
+
+            $ReturnList | Out-File -FilePath "$OutputFullPath"
+        }
+        'Object' { return $ReturnList }
+        Default { return $ReturnList }
+    }
+
+} # End Get-MailboxesWithExtras
