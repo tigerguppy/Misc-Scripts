@@ -43,8 +43,8 @@
 
 .NOTES
     Author: Tony Burrows
-    Version: 2.1.0 (2024-09-22)
-        Added output options
+    Version: 2.1.1 (2024-09-22)
+        Bug fixes
 #>
 
 function Get-MailboxesWithExtras {
@@ -230,7 +230,7 @@ function Get-MailboxesWithExtras {
                 }
             }
 
-            if ($null -eq $OutputFileName) {
+            if ($OutputFileName -eq '') {
                 $TimeStamp = $(Get-Date -Format yyyyMMdd-HHmmss)
                 $OutputFileName = "Mailboxes-$($TimeStamp).txt"
             }
