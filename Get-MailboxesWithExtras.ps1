@@ -43,7 +43,7 @@
 
 .NOTES
     Author: Tony Burrows
-    Version: 2.1.1 (2024-09-22)
+    Version: 2.1.2 (2024-09-22)
         Bug fixes
 #>
 
@@ -132,6 +132,7 @@ function Get-MailboxesWithExtras {
             } else {
                 $Obj = [PSCustomObject]@{
                     DisplayName       = $Mailbox.DisplayName
+                    MailboxTYpe       = $Mailbox.RecipientType
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'ForwardingSmtpAddress'
                     Description       = $ForwardingSmtpAddress -replace 'smtp:'
@@ -148,6 +149,7 @@ function Get-MailboxesWithExtras {
             } else {
                 $Obj = [PSCustomObject]@{
                     DisplayName       = $Mailbox.DisplayName
+                    MailboxTYpe       = $Mailbox.RecipientType
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'ForwardingAddress'
                     Description       = $ForwardingAddress -replace 'smtp:'
@@ -171,9 +173,10 @@ function Get-MailboxesWithExtras {
                     } else {
                         $Obj = [PSCustomObject]@{
                             DisplayName       = $Mailbox.DisplayName
+                            MailboxTYpe       = $Mailbox.RecipientType
                             UserPrincipalName = $Mailbox.UserPrincipalName
                             Type              = 'MailboxRule'
-                            Description       = $Rule.Name
+                            Description       = "$($Rule.Name) - $($Rule.ForwardTo)"
                         }
                         $ReturnList.Add($Obj) | Out-Null
                     }
@@ -187,6 +190,7 @@ function Get-MailboxesWithExtras {
             foreach ($MailboxPermission in $MailboxPermissions) {
                 $Obj = [PSCustomObject]@{
                     DisplayName       = $Mailbox.DisplayName
+                    MailboxTYpe       = $Mailbox.RecipientType
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'Permission'
                     Description       = "$($MailboxPermission.User) - $($MailboxPermission.AccessRights)"
@@ -247,7 +251,7 @@ function Get-MailboxesWithExtras {
                 }
             }
 
-            $ReturnList | Out-File -FilePath "$OutputFullPath"
+            $ReturnList | Sort-Object Description, DisplayName | Format-Table -AutoSize -Wrap | Out-File -FilePath "$OutputFullPath"
         }
         'Object' { return $ReturnList }
         Default { return $ReturnList }
