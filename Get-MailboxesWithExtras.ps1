@@ -34,6 +34,10 @@
     Specifies the name of the output file. If not provided, a timestamped filename is generated.
 
 .EXAMPLE
+    Get-MailboxesWithExtras -CheckAll
+    Retrieves all mailboxes with forwarding and permission information and outputs the result to a file at the default location.
+
+.EXAMPLE
     Get-MailboxesWithExtras -CheckAll -OutputOption 'File' -OutputPath 'C:\Logs' -OutputFileName 'Mailboxes.txt'
     Retrieves all mailboxes with forwarding and permission information and outputs the result to a file.
 
@@ -42,6 +46,8 @@
     Checks mailboxes for ForwardingSmtpAddress and outputs the result to the console.
 
 .NOTES
+    Default file location is $ENV:SystemRoot\Temp (usually C:\Temp).
+
     Author: Tony Burrows
     Version: 2.1.2 (2024-09-22)
         Bug fixes
