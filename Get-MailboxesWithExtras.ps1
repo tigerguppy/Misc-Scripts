@@ -49,7 +49,7 @@
     Default file location is $ENV:SystemRoot\Temp (usually C:\Temp).
 
     Author: Tony Burrows
-    Version: 2.1.2 (2024-09-22)
+    Version: 2.1.3 (2024-09-23)
         Bug fixes
 #>
 
@@ -138,7 +138,7 @@ function Get-MailboxesWithExtras {
             } else {
                 $Obj = [PSCustomObject]@{
                     DisplayName       = $Mailbox.DisplayName
-                    MailboxTYpe       = $Mailbox.RecipientType
+                    MailboxType       = $Mailbox.RecipientTypeDetails
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'ForwardingSmtpAddress'
                     Description       = $ForwardingSmtpAddress -replace 'smtp:'
@@ -155,7 +155,7 @@ function Get-MailboxesWithExtras {
             } else {
                 $Obj = [PSCustomObject]@{
                     DisplayName       = $Mailbox.DisplayName
-                    MailboxTYpe       = $Mailbox.RecipientType
+                    MailboxType       = $Mailbox.RecipientTypeDetails
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'ForwardingAddress'
                     Description       = $ForwardingAddress -replace 'smtp:'
@@ -179,7 +179,7 @@ function Get-MailboxesWithExtras {
                     } else {
                         $Obj = [PSCustomObject]@{
                             DisplayName       = $Mailbox.DisplayName
-                            MailboxTYpe       = $Mailbox.RecipientType
+                            MailboxType       = $Mailbox.RecipientTypeDetails
                             UserPrincipalName = $Mailbox.UserPrincipalName
                             Type              = 'MailboxRule'
                             Description       = "$($Rule.Name) - $($Rule.ForwardTo)"
@@ -196,7 +196,7 @@ function Get-MailboxesWithExtras {
             foreach ($MailboxPermission in $MailboxPermissions) {
                 $Obj = [PSCustomObject]@{
                     DisplayName       = $Mailbox.DisplayName
-                    MailboxTYpe       = $Mailbox.RecipientType
+                    MailboxType       = $Mailbox.RecipientTypeDetails
                     UserPrincipalName = $Mailbox.UserPrincipalName
                     Type              = 'Permission'
                     Description       = "$($MailboxPermission.User) - $($MailboxPermission.AccessRights)"
