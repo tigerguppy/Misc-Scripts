@@ -222,7 +222,7 @@ function Get-MailboxesWithExtras {
     Write-Progress -Id 0 -Activity 'Mailboxes' -Completed
 
     switch ($OutputOption) {
-        'Console' { $ReturnList | Sort-Object Description, DisplayName | Format-Table -AutoSize -Wrap }
+        'Console' { $ReturnList | Sort-Object DisplayName,Type,Description | Format-Table -AutoSize -Wrap }
         'File' {
 
             # Remove \ if it's at the end of the path
@@ -257,7 +257,7 @@ function Get-MailboxesWithExtras {
                 }
             }
 
-            $ReturnList | Sort-Object Type, DisplayName | Format-Table -AutoSize -Wrap | Out-File -FilePath "$OutputFullPath"
+            $ReturnList | Sort-Object DisplayName,Type,Description | Format-Table -AutoSize -Wrap | Out-File -FilePath "$OutputFullPath"
         }
         'Object' { return $ReturnList }
         Default { return $ReturnList }
