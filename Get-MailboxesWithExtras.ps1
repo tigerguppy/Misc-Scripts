@@ -49,8 +49,8 @@
     Default file location is $ENV:SystemRoot\Temp (usually C:\Temp).
 
     Author: Tony Burrows
-    Version: 2.1.3 (2024-09-23)
-        Bug fixes
+    Version: 2.2.0 (2024-09-23)
+        Added EXO connection testing.
 #>
 
 function Get-MailboxesWithExtras {
@@ -264,3 +264,80 @@ function Get-MailboxesWithExtras {
     }
 
 } # End Get-MailboxesWithExtras
+
+<#
+    This part of the script is to make life easier when running it on a regular basis.
+    You can remove everything from this commment section to the end of the script and the function will continue to work as documented above.
+#>
+
+# Check if EXO module is installed and available.
+$ExoManualInstallMessage = 'Please visit https://aka.ms/exov3-module and manually install the EXO module before rerunning this script.'
+$ExoModuleAvailable = Get-Module -ListAvailable -Name ExchangeOnlineManagement
+if ($ExoModuleAvailable.Count -ne 0) {
+    # Exo module is available
+} else {
+    $ExoInstallAnaswer = $Host.UI.PromptForChoice('EXO management module not available.', 'Install EXO module?', @('&Yes', '&No'), 0)
+    if ($ExoInstallAnaswer -eq 0) {
+        #Yes
+        # Check for admin rights
+        If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+                    [Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+            # Not running as admin
+            Write-Output 'Not running as administrator.'
+            Write-Output $ExoManualInstallMessage
+            Read-Host -Prompt "Press enter to exit"
+            exit
+        } else {
+            # Running as admin
+            Write-Output "Installing Exchange Online Management module from PSGallary."
+            Install-Module -Name ExchangeOnlineManagement
+        }
+        
+    } else {
+        #No
+        Write-Output $ExoManualInstallMessage
+        Exit
+    }
+}
+
+# Check if connected to EXO. If not, propmt to connect.
+$ConnectionStatus = Get-ConnectionInformation
+if ($ConnectionStatus.State -eq 'Connected' -and $ConnectionStatus.Name -like '*ExchangeOnline*') {
+    Write-Output 'Connected to EXO, continuing...'
+} else {
+    $ConnectAnswer = $Host.UI.PromptForChoice('Exchange Online Connection', 'Connect to EXO?', @('&Yes', '&No'), 0)
+    if ($ConnectAnswer -eq 0) {
+        #Yes
+        Write-Output 'Connecting to EXO'
+        Connect-ExchangeOnline
+    } else {
+        #No
+        Write-Output 'Exiting...'
+        Exit
+    }
+}
+
+# If connected to EXO, get mailbox info.
+$ConnectionStatus = Get-ConnectionInformation
+if ($ConnectionStatus.State -eq 'Connected' -and $ConnectionStatus.Name -like '*ExchangeOnline*') {
+    Write-Output 'Getting mailbox info'
+    Get-MailboxesWithExtras -CheckAll -OutputOption File
+} else {
+    Write-Output 'Not connected to EXO. Exiting.'
+    Exit
+}
+
+# Prompt to disconnect from EXO if connected.
+$ConnectionStatus = Get-ConnectionInformation
+if ($ConnectionStatus.State -eq 'Connected' -and $ConnectionStatus.Name -like '*ExchangeOnline*') {
+    $DisconnectAnswer = $Host.UI.PromptForChoice('Exchange Online Connection', 'Disconnect from EXO?', @('&Yes', '&No'), 0)
+    if ($DisconnectAnswer -eq 0) {
+        #Yes
+        Write-Output 'Disconnecting from EXO'
+        Disconnect-ExchangeOnline -Confirm:$false
+    } else {
+        #No
+        Write-Output 'Exiting...'
+        Exit
+    }
+}
