@@ -257,7 +257,7 @@ function Get-MailboxesWithExtras {
                 }
             }
 
-            $ReturnList | Sort-Object Description, DisplayName | Format-Table -AutoSize -Wrap | Out-File -FilePath "$OutputFullPath"
+            $ReturnList | Sort-Object Type, DisplayName | Format-Table -AutoSize -Wrap | Out-File -FilePath "$OutputFullPath"
         }
         'Object' { return $ReturnList }
         Default { return $ReturnList }
@@ -309,7 +309,7 @@ if ($ConnectionStatus.State -eq 'Connected' -and $ConnectionStatus.Name -like '*
     if ($ConnectAnswer -eq 0) {
         #Yes
         Write-Output 'Connecting to EXO'
-        Connect-ExchangeOnline
+        Connect-ExchangeOnline -ShowBanner:$false
     } else {
         #No
         Write-Output 'Exiting...'
