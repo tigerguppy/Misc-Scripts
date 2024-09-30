@@ -1,56 +1,56 @@
 <#
 .SYNOPSIS
-    Retrieves mailbox information, including forwarding addresses, mailbox rules, and permissions.
+Retrieves mailbox information, including forwarding addresses, mailbox rules, and permissions.
 
 .DESCRIPTION
-    This function checks Exchange mailboxes for specific properties such as ForwardingSmtpAddress, 
-    ForwardingAddress, mailbox rules with forwarding enabled, and additional permissions. 
-    It allows output customization (console, file, or object) and supports detailed mailbox 
-    processing progress.
+This function checks Exchange mailboxes for specific properties such as ForwardingSmtpAddress, 
+ForwardingAddress, mailbox rules with forwarding enabled, and additional permissions. 
+It allows output customization (console, file, or object) and supports detailed mailbox 
+processing progress.
 
 .PARAMETER CheckForwardingSmtpAddress
-    Checks if a ForwardingSmtpAddress is configured for the mailbox.
+Checks if a ForwardingSmtpAddress is configured for the mailbox.
 
 .PARAMETER CheckForwardingAddress
-    Checks if a ForwardingAddress is configured for the mailbox.
+Checks if a ForwardingAddress is configured for the mailbox.
 
 .PARAMETER CheckMailboxRules
-    Checks for mailbox rules with forwarding enabled.
+Checks for mailbox rules with forwarding enabled.
 
 .PARAMETER CheckPermissions
-    Checks if the mailbox has additional permissions granted to other users.
+Checks if the mailbox has additional permissions granted to other users.
 
 .PARAMETER CheckAll
-    Checks all the options: ForwardingSmtpAddress, ForwardingAddress, Mailbox Rules, and Permissions.
+Checks all the options: ForwardingSmtpAddress, ForwardingAddress, Mailbox Rules, and Permissions.
 
 .PARAMETER OutputOption
-    Specifies the output method: Console, File, or Object. The default is Object.
+Specifies the output method: Console, File, or Object. The default is Object.
 
 .PARAMETER OutputPath
-    Specifies the directory to save the output file if 'File' is selected as the output option. 
-    Default is the system's Temp directory.
+Specifies the directory to save the output file if 'File' is selected as the output option. 
+Default is the system's Temp directory.
 
 .PARAMETER OutputFileName
-    Specifies the name of the output file. If not provided, a timestamped filename is generated.
+Specifies the name of the output file. If not provided, a timestamped filename is generated.
 
 .EXAMPLE
-    Get-MailboxesWithExtras -CheckAll
-    Retrieves all mailboxes with forwarding and permission information and outputs the result to a file at the default location.
+Get-MailboxesWithExtras -CheckAll
+Retrieves all mailboxes with forwarding and permission information and outputs the result to a file at the default location.
 
 .EXAMPLE
-    Get-MailboxesWithExtras -CheckAll -OutputOption 'File' -OutputPath 'C:\Logs' -OutputFileName 'Mailboxes.txt'
-    Retrieves all mailboxes with forwarding and permission information and outputs the result to a file.
+Get-MailboxesWithExtras -CheckAll -OutputOption 'File' -OutputPath 'C:\Logs' -OutputFileName 'Mailboxes.txt'
+Retrieves all mailboxes with forwarding and permission information and outputs the result to a file.
 
 .EXAMPLE
-    Get-MailboxesWithExtras -CheckForwardingSmtpAddress -OutputOption 'Console'
-    Checks mailboxes for ForwardingSmtpAddress and outputs the result to the console.
+Get-MailboxesWithExtras -CheckForwardingSmtpAddress -OutputOption 'Console'
+Checks mailboxes for ForwardingSmtpAddress and outputs the result to the console.
 
 .NOTES
-    Default file location is $ENV:SystemRoot\Temp (usually C:\Temp).
+Default file location is $ENV:SystemRoot\Temp (usually C:\Temp).
 
-    Author: Tony Burrows
-    Version: 2.2.0 (2024-09-23)
-        Added EXO connection testing.
+Author: Tony Burrows
+Version: 2.2.0 (2024-09-23)
+Added EXO connection testing.
 #>
 
 function Get-MailboxesWithExtras {
@@ -67,25 +67,25 @@ function Get-MailboxesWithExtras {
             HelpMessage = 'Check mailboxes for ForwardingSmtpAddress.', 
             ParameterSetName = 'Default')]
         [switch]$CheckForwardingAddress,
-        
+
         [Parameter(Mandatory = $false, 
             Position = 2, 
             HelpMessage = 'Check mailboxes for mailbox rules with forwarding enabled.', 
             ParameterSetName = 'Default')]
         [switch]$CheckMailboxRules,
-        
+
         [Parameter(Mandatory = $false, 
             Position = 3, 
             HelpMessage = 'Check mailboxes for additional permissions.', 
             ParameterSetName = 'Default')]
         [switch]$CheckPermissions = $false,
-        
+
         [Parameter(Mandatory = $false, 
             Position = 0, 
             HelpMessage = 'Check all options.', 
             ParameterSetName = 'CheckAll')]
         [switch]$CheckAll = $false,
-        
+
         [Parameter(Mandatory = $False,
             Position = 4,
             HelpMessage = 'Output options.',
@@ -222,7 +222,7 @@ function Get-MailboxesWithExtras {
     Write-Progress -Id 0 -Activity 'Mailboxes' -Completed
 
     switch ($OutputOption) {
-        'Console' { $ReturnList | Sort-Object DisplayName,Type,Description | Format-Table -AutoSize -Wrap }
+        'Console' { $ReturnList | Sort-Object DisplayName, Type, Description | Format-Table -AutoSize -Wrap }
         'File' {
 
             # Remove \ if it's at the end of the path
@@ -244,7 +244,7 @@ function Get-MailboxesWithExtras {
                 $TimeStamp = $(Get-Date -Format yyyyMMdd-HHmmss)
                 $OutputFileName = "Mailboxes-$($TimeStamp).txt"
             }
-            
+
             $OutputFullPath = "$OutputPath\$OutputFileName"
 
             if (Test-Path "$OutputFullPath") {
@@ -257,7 +257,18 @@ function Get-MailboxesWithExtras {
                 }
             }
 
-            $ReturnList | Sort-Object DisplayName,Type,Description | Format-Table -AutoSize -Wrap | Out-File -FilePath "$OutputFullPath"
+            $ReturnList | Sort-Object DisplayName, Type, Description | Format-Table -AutoSize -Wrap | Out-File -FilePath "$OutputFullPath"
+
+            if (Test-Path -Path "$OutputFullPath" -PathType Leaf) {
+                Write-Output "File exported to $OutputFullPath"
+                $FileAnswer = $Host.UI.PromptForChoice("Open export folder $($OutputPath)", 'Open folder?', @('&Yes', '&No'), 0)
+                if ($FileAnswer -eq 0) {
+                    #Yes
+                    Start-Process "$ENV:SystemRoot\explorer.exe" -ArgumentList "$OutputPath"
+                }
+            } else {
+                Write-Output "Unable to export file to $OutputFullPath"
+            }
         }
         'Object' { return $ReturnList }
         Default { return $ReturnList }
@@ -266,8 +277,8 @@ function Get-MailboxesWithExtras {
 } # End Get-MailboxesWithExtras
 
 <#
-    This part of the script is to make life easier when running it on a regular basis.
-    You can remove everything from this commment section to the end of the script and the function will continue to work as documented above.
+This part of the script is to make life easier when running it on a regular basis.
+You can remove everything from this commment section to the end of the script and the function will continue to work as documented above.
 #>
 
 # Check if EXO module is installed and available.
@@ -285,14 +296,14 @@ if ($ExoModuleAvailable.Count -ne 0) {
             # Not running as admin
             Write-Output 'Not running as administrator.'
             Write-Output $ExoManualInstallMessage
-            Read-Host -Prompt "Press enter to exit"
+            Read-Host -Prompt 'Press enter to exit'
             exit
         } else {
             # Running as admin
-            Write-Output "Installing Exchange Online Management module from PSGallary."
+            Write-Output 'Installing Exchange Online Management module from PSGallary.'
             Install-Module -Name ExchangeOnlineManagement
         }
-        
+
     } else {
         #No
         Write-Output $ExoManualInstallMessage
