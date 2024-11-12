@@ -49,7 +49,7 @@ function Get-UserInfo {
             Position = 1,
             ValueFromPipeline = $false,
             HelpMessage = 'Domain Controller NetBIOS name')]
-        $Servers = $(Get-ADDomainController -Discover).Name,
+        $Servers = $(Get-ADDomainController -Discover -Service "PrimaryDC").Name,
         [Parameter(
             Mandatory = $false,
             Position = 2,
