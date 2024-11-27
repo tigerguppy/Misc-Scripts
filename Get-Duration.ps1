@@ -16,15 +16,20 @@ The end date or date-time as a string (e.g., 'MM-DD-YYYY', 'YYYY-MM-DD HH:mm:ss 
 PSCustomObject
 An object containing the elapsed years, months, days, hours, minutes, and seconds.
 
-.EXAMPLES
-# Example 1: Just dates
+.EXAMPLE
 Get-Duration -Start '08-15-2024' -End '11-27-2024'
 
-# Example 2: Date and time (12-hour format)
+Calculates the duration between August 15, 2024, and November 27, 2024, using just the dates.
+
+.EXAMPLE
 Get-Duration -Start '08-15-2024 02:30 PM' -End '11-27-2024 08:45 AM'
 
-# Example 3: Date and time (24-hour format)
+Calculates the duration between August 15, 2024, at 2:30 PM (12-hour format) and November 27, 2024, at 8:45 AM (12-hour format).
+
+.EXAMPLE
 Get-Duration -Start '2024-08-15 14:30:00' -End '2024-11-27 08:45:00'
+
+Calculates the duration between August 15, 2024, at 14:30 (2:30 PM in 24-hour format) and November 27, 2024, at 08:45 (8:45 AM in 24-hour format).
 
 .VERSION
 1.2.0
