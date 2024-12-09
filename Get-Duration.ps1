@@ -3,53 +3,45 @@
 Calculates the elapsed duration between two dates in terms of years, months, days, hours, minutes, and seconds.
 
 .DESCRIPTION
-The Get-Duration function calculates the time elapsed between two dates or date-time strings.
-It supports various formats and provides a detailed breakdown of the duration.
+The Get-Duration function calculates the time elapsed between two dates or date-time strings. If one of the parameters (-Start or -End) is omitted, the current date/time is used by default. This simplifies use cases where only one date needs to be specified.
 
 .PARAMETER Start
-The start date or date-time as a string (e.g., 'MM-DD-YYYY', 'YYYY-MM-DD HH:mm:ss AM/PM').
+The start date or date-time as a string (e.g., 'MM-DD-YYYY HH:mm:ss'). Defaults to the current date/time if not provided.
 
 .PARAMETER End
-The end date or date-time as a string (e.g., 'MM-DD-YYYY', 'YYYY-MM-DD HH:mm:ss AM/PM').
+The end date or date-time as a string (e.g., 'MM-DD-YYYY HH:mm:ss'). Defaults to the current date/time if not provided.
 
 .OUTPUTS
 PSCustomObject
-An object containing the elapsed years, months, days, hours, minutes, and seconds.
+An object containing the elapsed years, months, days, hours, minutes, and seconds between the two dates.
 
 .EXAMPLE
 Get-Duration -Start '08-15-2024' -End '11-27-2024'
 
-Calculates the duration between August 15, 2024, and November 27, 2024, using just the dates.
+Calculates the duration between August 15, 2024, and November 27, 2024.
 
 .EXAMPLE
-Get-Duration -Start '08-15-2024 02:30 PM' -End '11-27-2024 08:45 AM'
+Get-Duration -Start '08-15-2024'
 
-Calculates the duration between August 15, 2024, at 2:30 PM (12-hour format) and November 27, 2024, at 8:45 AM (12-hour format).
+Calculates the duration between August 15, 2024, and the current date/time.
 
 .EXAMPLE
-Get-Duration -Start '2024-08-15 14:30:00' -End '2024-11-27 08:45:00'
+Get-Duration -End '11-27-2024'
 
-Calculates the duration between August 15, 2024, at 14:30 (2:30 PM in 24-hour format) and November 27, 2024, at 08:45 (8:45 AM in 24-hour format).
+Calculates the duration between the current date/time and November 27, 2024.
+
+.EXAMPLE
+Get-Duration
+
+Calculates the duration between the current date/time and the current date/time, resulting in zeroed output.
 
 .VERSION
-1.2.0
+1.5.0
 
 .CHANGELOG
-Version 1.2.0 - 2024-11-27
-- Updated documentation to include examples for 12-hour and 24-hour time formats.
-- Improved error handling for invalid date/time input.
-- Enhanced user guidance through error messages.
-
-Version 1.1.0 - 2024-11-20
-- Added support for date-time formats (12-hour and 24-hour).
-- Improved input validation and sanitization.
-
-Version 1.0.0 - 2024-11-15
-- Initial version with basic date-only duration calculation.
-
-.NOTES
-- Ensure valid date formats to avoid errors.
-- The Start date must be earlier than the End date.
+Version 1.5.0 - 2024-12-09
+- Simplified parameter handling using default values for Start and End.
+- Removed multiple parameter sets and related complexity.
 
 .AUTHOR
 Tony Burrows
@@ -58,11 +50,11 @@ Contact: scripts@tigerguppy.com
 
 function Get-Duration {
     param (
-        [Parameter(Mandatory)]
-        [string]$Start,  # Start date or date-time as a string (e.g., 'MM-DD-YYYY HH:mm:ss')
-        
-        [Parameter(Mandatory)]
-        [string]$End     # End date or date-time as a string (e.g., 'MM-DD-YYYY HH:mm:ss')
+        [Parameter(Mandatory = $false)]
+        [string]$Start = $(Get-Date), # Start date or date-time as a string (e.g., 'MM-DD-YYYY HH:mm:ss')
+
+        [Parameter(Mandatory = $false)]
+        [string]$End = $(Get-Date)  # End date or date-time as a string (e.g., 'MM-DD-YYYY HH:mm:ss')
     )
 
     # Try to parse the input strings into datetime objects
