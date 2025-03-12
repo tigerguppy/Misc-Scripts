@@ -7,12 +7,12 @@
     shows progress, and tees outputs to both the console and log files.
 .NOTES
     Author: Tony Burrows
-    Date: 2024-03-11
+    Date: 2025-03-11
 #>
 
 # Global variables for progress tracking
 $global:StepCounter = 0
-$global:TotalSteps = 10
+$global:TotalSteps = 22
 
 # Helper: Update progress bar
 function Update-Progress {
@@ -22,6 +22,7 @@ function Update-Progress {
         [string]$Activity
     )
     $Percent = [math]::Round(($Step / $Total) * 100, 0)
+    if ($Percent -gt 100) { $Percent = 100 }
     Write-Progress -Activity $Activity -Status "Step $Step of $Total ($Percent`%)" -PercentComplete $Percent
 }
 
@@ -110,7 +111,7 @@ function Get-UserConsent {
     Write-StepLogEntry -Message 'User consent received. Continuing.' -LogFile 'Summary.log' -LogDir $LogDir
 }
 
-# Create Restore Point
+# Create Restore Point with repair attempt if needed
 function New-SystemRestorePoint {
     param([string]$LogDir)
     Write-Host 'Creating System Restore Point...'
@@ -197,11 +198,11 @@ function Reset-WindowsUpdate {
     }
 
     try {
-        Remove-Item "$env:allusersprofile\Application Data\Microsoft\Network\Downloader\qmgr*.dat" -ErrorAction Stop
-        Rename-Item "$env:systemroot\SoftwareDistribution\DataStore" 'DataStore.bak' -ErrorAction Stop
-        Rename-Item "$env:systemroot\System32\Catroot2" 'catroot2.bak' -ErrorAction Stop
-        Rename-Item "$env:systemroot\SoftwareDistribution\Download" 'Download.bak' -ErrorAction Stop
-        Remove-Item "$env:systemroot\WindowsUpdate.log" -ErrorAction Stop
+        Remove-Item "$env:allusersprofile`:\Application Data\Microsoft\Network\Downloader\qmgr*.dat" -ErrorAction Stop
+        Rename-Item "$env:systemroot`:\SoftwareDistribution\DataStore" 'DataStore.bak' -ErrorAction Stop
+        Rename-Item "$env:systemroot`:\System32\Catroot2" 'catroot2.bak' -ErrorAction Stop
+        Rename-Item "$env:systemroot`:\SoftwareDistribution\Download" 'Download.bak' -ErrorAction Stop
+        Remove-Item "$env:systemroot`:\WindowsUpdate.log" -ErrorAction Stop
         Write-StepLogEntry -Message 'Windows Update folders and logs reset.' -LogFile 'WindowsUpdate.log' -LogDir $LogDir
     } catch {
         $errMsg = "Windows Update reset error: $($_.Exception.Message)"
