@@ -14,6 +14,43 @@
 $global:StepCounter = 0
 $global:TotalSteps = 22
 
+function Set-WindowMaximized {
+    # Attempt to retrieve the main window handle for the current process.
+    $hwnd = (Get-Process -Id $PID).MainWindowHandle
+
+    # Add the necessary user32.dll functions.
+    # The namespace is declared within the type definition.
+    Add-Type -TypeDefinition @'
+namespace CustomWinAPI {
+    using System;
+    using System.Runtime.InteropServices;
+    public static class WindowHelper {
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+    }
+}
+'@ -ErrorAction Stop
+
+    # SW_MAXIMIZE constant (3)
+    $SW_MAXIMIZE = 3
+
+    # If no main window handle is found (common in Windows Terminal),
+    # fall back to using the current foreground window.
+    if ($hwnd -eq [IntPtr]::Zero) {
+        $hwnd = [CustomWinAPI.WindowHelper]::GetForegroundWindow()
+    }
+
+    if ($hwnd -eq [IntPtr]::Zero) {
+        Write-Warning 'Unable to locate a valid window handle.'
+        return
+    }
+
+    # Maximize the window using the ShowWindow API.
+    [CustomWinAPI.WindowHelper]::ShowWindow($hwnd, $SW_MAXIMIZE) | Out-Null
+}
+
 # Helper: Update progress bar
 function Update-Progress {
     param(
@@ -255,6 +292,7 @@ function Get-SystemTasks {
 
 # Main Execution
 Test-AdminPrivilege
+Set-WindowMaximized
 
 $global:StartTime = Get-Date  # Initialize start time here
 $LogDir = Initialize-LogDirectory
