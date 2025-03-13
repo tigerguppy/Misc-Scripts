@@ -4,22 +4,77 @@
 .DESCRIPTION
     Automates filesystem corruption checks, Windows Update component resets,
     network resets, malware scans, and autorun/scheduled tasks reviews. Logs actions with timestamps,
-    shows progress, and tees outputs to both the console and log files.
+    shows progress, tees outputs to both the console and log files, and captures a transcript.
 .NOTES
     Author: Tony Burrows
-    Date: 2025-03-11
+    Date: 2025-03-12
 #>
 
 # Global variables for progress tracking
 $global:StepCounter = 0
-$global:TotalSteps = 22
+$global:TotalSteps = 22  # NOTE: Update this variable if the number of steps changes.
+$GLOBAL:OriginalConsoleMode = $null
+
+function Disable-QuickEdit {
+    <#
+    .SYNOPSIS
+        Disables QuickEdit mode in the PowerShell console.
+    .DESCRIPTION
+        Retrieves the current console mode and disables QuickEdit mode by removing
+        the ENABLE_QUICK_EDIT_MODE flag. Prevents script execution from pausing
+        when the window is clicked.
+    .NOTES
+        QuickEdit mode allows users to click inside the console window and select text,
+        but it also pauses script execution until selection is cleared.
+    .EXAMPLE
+        Disable-QuickEdit
+        Disables QuickEdit mode in the active PowerShell session.
+    #>
+    Add-Type -MemberDefinition @'
+        [DllImport("kernel32.dll", SetLastError=true)]
+        public static extern IntPtr GetStdHandle(int nStdHandle);
+        [DllImport("kernel32.dll", SetLastError=true)]
+        public static extern bool GetConsoleMode(IntPtr hConsoleHandle, out int lpMode);
+        [DllImport("kernel32.dll", SetLastError=true)]
+        public static extern bool SetConsoleMode(IntPtr hConsoleHandle, int dwMode);
+'@ -Name 'Kernel32' -Namespace 'WinAPI'
+
+    $STD_INPUT_HANDLE = -10  # Standard input handle
+    $hInput = [WinAPI.Kernel32]::GetStdHandle($STD_INPUT_HANDLE)
+
+    if ($hInput -eq [IntPtr]::Zero) { return }
+
+    $mode = 0
+    if ([WinAPI.Kernel32]::GetConsoleMode($hInput, [ref]$mode)) {
+        $GLOBAL:OriginalConsoleMode = $mode  
+        $newMode = $mode -band (-bnot 0x40)  # Disable QuickEdit Mode (mask out ENABLE_QUICK_EDIT_MODE 0x40)
+        [WinAPI.Kernel32]::SetConsoleMode($hInput, $newMode) | Out-Null
+    }
+}
+
+function Enable-QuickEdit {
+    <#
+    .SYNOPSIS
+        Restores QuickEdit mode in the PowerShell console.
+    .DESCRIPTION
+        Restores the console mode settings to their original state before QuickEdit mode
+        was disabled.
+    .NOTES
+        This function should be executed when the script exits to ensure the console
+        behaves as expected for the user.
+    .EXAMPLE
+        Enable-QuickEdit
+        Restores QuickEdit mode in the active PowerShell session.
+    #>
+    if ($null -ne $GLOBAL:OriginalConsoleMode) {
+        $STD_INPUT_HANDLE = -10
+        $hInput = [WinAPI.Kernel32]::GetStdHandle($STD_INPUT_HANDLE)
+        [WinAPI.Kernel32]::SetConsoleMode($hInput, $GLOBAL:OriginalConsoleMode) | Out-Null
+    }
+}
 
 function Set-WindowMaximized {
-    # Attempt to retrieve the main window handle for the current process.
     $hwnd = (Get-Process -Id $PID).MainWindowHandle
-
-    # Add the necessary user32.dll functions.
-    # The namespace is declared within the type definition.
     Add-Type -TypeDefinition @'
 namespace CustomWinAPI {
     using System;
@@ -33,21 +88,14 @@ namespace CustomWinAPI {
 }
 '@ -ErrorAction Stop
 
-    # SW_MAXIMIZE constant (3)
     $SW_MAXIMIZE = 3
-
-    # If no main window handle is found (common in Windows Terminal),
-    # fall back to using the current foreground window.
     if ($hwnd -eq [IntPtr]::Zero) {
         $hwnd = [CustomWinAPI.WindowHelper]::GetForegroundWindow()
     }
-
     if ($hwnd -eq [IntPtr]::Zero) {
         Write-Warning 'Unable to locate a valid window handle.'
         return
     }
-
-    # Maximize the window using the ShowWindow API.
     [CustomWinAPI.WindowHelper]::ShowWindow($hwnd, $SW_MAXIMIZE) | Out-Null
 }
 
@@ -77,9 +125,7 @@ function Write-LogEntry {
     } else {
         $MessageToLog = "$Timestamp - $Message"
     }
-    # Write to log file
     $MessageToLog | Out-File -FilePath "$LogDir\$LogFile" -Append
-    # Also output to the console
     Write-Host $MessageToLog
 }
 
@@ -92,7 +138,6 @@ function Write-StepLogEntry {
     )
     $global:StepCounter++
     Write-LogEntry -Message $Message -LogFile $LogFile -LogDir $LogDir -StepNumber $global:StepCounter
-    # Update progress bar after logging each major step
     Update-Progress -Step $global:StepCounter -Total $global:TotalSteps -Activity 'Executing Steps'
 }
 
@@ -159,23 +204,16 @@ function New-SystemRestorePoint {
         $errMsg = "Failed to create System Restore Point: $($_.Exception.Message)"
         Write-Warning $errMsg
         Write-StepLogEntry -Message $errMsg -LogFile 'RestorePoint.log' -LogDir $LogDir
-        
         $userResponse = Read-Host 'Would you like to attempt to repair the system restore configuration and try again? (Y/N)'
         if ($userResponse -match '^[Yy]$') {
             try {
                 Write-Host 'Attempting to repair system restore configuration...'
                 Write-StepLogEntry -Message 'Attempting to repair system restore configuration.' -LogFile 'RestorePoint.log' -LogDir $LogDir
-                
-                # Enable System Restore for C: drive if disabled
                 Enable-ComputerRestore -Drive 'C:\' -ErrorAction Stop
                 Write-StepLogEntry -Message 'System Restore enabled for C:\' -LogFile 'RestorePoint.log' -LogDir $LogDir
-                
-                # Ensure Volume Shadow Copy service is set to Automatic and start it
                 Set-Service -Name VSS -StartupType Automatic -ErrorAction Stop
                 Start-Service -Name VSS -ErrorAction Stop
                 Write-StepLogEntry -Message 'Volume Shadow Copy service started.' -LogFile 'RestorePoint.log' -LogDir $LogDir
-                
-                # Attempt to create the restore point again
                 Checkpoint-Computer -Description 'System Repair Restore Point' -RestorePointType 'MODIFY_SETTINGS' -ErrorAction Stop
                 Write-StepLogEntry -Message 'System Restore Point created on second attempt.' -LogFile 'RestorePoint.log' -LogDir $LogDir
             } catch {
@@ -233,7 +271,6 @@ function Reset-WindowsUpdate {
             Write-StepLogEntry -Message $errMsg -LogFile 'WindowsUpdate.log' -LogDir $LogDir
         }
     }
-
     try {
         Remove-Item "$env:allusersprofile`:\Application Data\Microsoft\Network\Downloader\qmgr*.dat" -ErrorAction Stop
         Rename-Item "$env:systemroot`:\SoftwareDistribution\DataStore" 'DataStore.bak' -ErrorAction Stop
@@ -246,9 +283,7 @@ function Reset-WindowsUpdate {
         Write-Warning $errMsg
         Write-StepLogEntry -Message $errMsg -LogFile 'WindowsUpdate.log' -LogDir $LogDir
     }
-
     foreach ($svc in $services) {
-        # Skip reconfiguring 'appidsvc' due to known access restrictions.
         if ($svc -eq 'appidsvc') {
             $skipMsg = "Skipping reconfiguration for $svc due to access restrictions."
             Write-StepLogEntry -Message $skipMsg -LogFile 'WindowsUpdate.log' -LogDir $LogDir
@@ -285,7 +320,6 @@ function Get-SystemTasks {
     param([string]$LogDir)
     Get-ScheduledTask | Where-Object { $_.State -eq 'Ready' } | Select-Object TaskName, State | Out-File "$LogDir\ScheduledTasks.log"
     Write-StepLogEntry -Message 'Scheduled tasks reviewed.' -LogFile 'ScheduledTasks.log' -LogDir $LogDir
-
     Get-CimInstance Win32_StartupCommand | Select-Object Name, Command, Location | Out-File "$LogDir\Autoruns.log"
     Write-StepLogEntry -Message 'Autorun entries reviewed.' -LogFile 'Autoruns.log' -LogDir $LogDir
 }
@@ -293,24 +327,38 @@ function Get-SystemTasks {
 # Main Execution
 Test-AdminPrivilege
 Set-WindowMaximized
+Disable-QuickEdit
 
-$global:StartTime = Get-Date  # Initialize start time here
-$LogDir = Initialize-LogDirectory
-Write-StepLogEntry -Message 'Script execution started.' -LogFile 'Summary.log' -LogDir $LogDir
+# Ensure QuickEdit is restored when script exits, even if terminated
+Register-EngineEvent PowerShell.Exiting -Action { Enable-QuickEdit }
 
-Get-OSVersion -LogDir $LogDir
-Test-DiskSpace -LogDir $LogDir
-Get-UserConsent -LogDir $LogDir
-New-SystemRestorePoint -LogDir $LogDir
-Invoke-CorruptionChecks -LogDir $LogDir
-Reset-WindowsUpdate -LogDir $LogDir
-Reset-Network -LogDir $LogDir
-Invoke-MalwareScan -LogDir $LogDir
-Get-SystemTasks -LogDir $LogDir
+try {
+    $global:StartTime = Get-Date  # Initialize start time here
+    $LogDir = Initialize-LogDirectory
 
-# Completion
-$EndTime = Get-Date
-$TotalDuration = $EndTime - $global:StartTime
-Write-StepLogEntry -Message "Script completed. Duration: $TotalDuration" -LogFile 'Summary.log' -LogDir $LogDir
-Write-Host "All operations completed. Logs saved at $LogDir"
-Write-Host 'Please reboot your computer to finalize repairs.'
+    # Start transcript logging (saved in the same log folder)
+    Start-Transcript -Path "$LogDir\Transcript.log" -Append
+
+    Write-StepLogEntry -Message 'Script execution started.' -LogFile 'Summary.log' -LogDir $LogDir
+
+    Get-OSVersion -LogDir $LogDir
+    Test-DiskSpace -LogDir $LogDir
+    Get-UserConsent -LogDir $LogDir
+    New-SystemRestorePoint -LogDir $LogDir
+    Invoke-CorruptionChecks -LogDir $LogDir
+    Reset-WindowsUpdate -LogDir $LogDir
+    Reset-Network -LogDir $LogDir
+    Invoke-MalwareScan -LogDir $LogDir
+    Get-SystemTasks -LogDir $LogDir
+
+    $EndTime = Get-Date
+    $TotalDuration = $EndTime - $global:StartTime
+    Write-StepLogEntry -Message "Script completed. Duration: $TotalDuration" -LogFile 'Summary.log' -LogDir $LogDir
+    Write-Host "All operations completed. Logs saved at $LogDir"
+    Write-Host 'Please reboot your computer to finalize repairs.'
+} catch {
+    Write-Warning "An unexpected error occurred: $_"
+} finally {
+    Enable-QuickEdit  # Re-enable QuickEdit before exit
+    Stop-Transcript   # Ensure transcript is stopped
+}
