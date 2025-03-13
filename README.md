@@ -84,6 +84,8 @@
 
 [Email, domain, & DNS tools](https://mxtoolbox.com/)
 
+[DMARC, DKIM, SPF email security checker](https://powerdmarc.com/analyzer/)
+
 [ICANN Whois search](https://lookup.icann.org/en/lookup)
 
 [QR Code Reader](https://scanqr.org/)
