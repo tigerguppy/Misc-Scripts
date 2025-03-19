@@ -119,6 +119,8 @@
 
 [Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
 
+[Sysinternals Live](https://live.sysinternals.com/)
+
 [Support and Recovery Assistant](https://aka.ms/sara)
 
 [Update Catalog](https://www.catalog.update.microsoft.com/Home.aspx)
