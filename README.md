@@ -211,6 +211,8 @@
 
 [Large list of EoL enterprise products](https://www.parkplacetechnologies.com/eosl/)
 
+[Meraki](https://documentation.meraki.com/General_Administration/Other_Topics/Meraki_End-of-Life_(EOL)_Products_and_Dates)
+
 [Microsoft Surface products](https://learn.microsoft.com/en-us/surface/surface-driver-firmware-lifecycle-support)
 
 [Microsoft software](https://learn.microsoft.com/en-us/lifecycle/products/)
