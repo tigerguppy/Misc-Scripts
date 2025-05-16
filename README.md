@@ -1,11 +1,10 @@
 # Misc Scripts, Tools, & Links
+
 [Abuse reports](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#abuse-reports)
 
 [Blacklist & Scan Tools](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#blacklist--scan-tools)
 
 [Calculators & Conversion Tools](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#calculators--conversion-tools)
-
-[Data Breach](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#data-breach)
 
 [Domain, DNS, & URL Tools](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#domain-dns--url-tools)
 
@@ -15,7 +14,7 @@
 
 [Passwords & Pins](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#passwords--pins)
 
-[Privacy](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#privacy)
+[Privacy & Data Breaches](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#privacy--data-breaches)
 
 [Product Datasheets](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#product-datasheets)
 
@@ -26,15 +25,16 @@
 [System Lifecycles](https://github.com/tigerguppy/Misc-Scripts/blob/main/README.md#system-lifecycles)
 
 
+
 ## Abuse reports
-
-[Spamcop - Report Spam emails](https://www.spamcop.net/mcgi)
-
-[Bit.ly link checker](https://support.bitly.com/hc/en-us/p/link-checker)
 
 [Bit.ly abuse form](https://bitly.com/pages/trust/report-abuse)
 
+[Bit.ly link checker](https://support.bitly.com/hc/en-us/p/link-checker)
+
 [Redirect checker](https://wheregoes.com/)
+
+[Spamcop - Report Spam emails](https://www.spamcop.net/mcgi)
 
 
 
@@ -58,19 +58,13 @@
 
 [CyberChef](https://gchq.github.io/CyberChef)
 
-[Regex Test](https://regex101.com/)
-
 [Hundreds of calculators](https://www.calctool.org/)
 
 [IP Subnet Calculator](https://jodies.de/ipcalc)
 
+[Regex Test](https://regex101.com/)
+
 [The WinTel Guy](https://wintelguy.com/)
-
-
-
-## Data Breach
-
-[Leaked password lookup](https://haveibeenpwned.com/)
 
 
 
@@ -80,11 +74,11 @@
 
 [Cross browser testing](https://www.browserling.com/)
 
+[DMARC, DKIM, SPF email security checker](https://powerdmarc.com/analyzer/)
+
 [DNS lookup](https://dnsdumpster.com/)
 
 [Email, domain, & DNS tools](https://mxtoolbox.com/)
-
-[DMARC, DKIM, SPF email security checker](https://powerdmarc.com/analyzer/)
 
 [ICANN Whois search](https://lookup.icann.org/en/lookup)
 
@@ -101,27 +95,30 @@
 [Zoho Free Tools](https://www.site24x7.com/tools/)
 
 
+
 ## Microsoft Links
+
+[Email Header Analyzer](https://aka.ms/mha)
 
 [Group Policy Catalog](https://admx.help/)
 
 [Hybrid Config Wizard](https://aka.ms/HybridWizard)
 
-[Email Header Analyzer](https://aka.ms/mha)
-
-[Microsoft aka.ms sites search](https://akasearch.net/)
-
-[Microsoft aka.ms sites (GitHub)](https://github.com/microsoft/aka)
-
-[Microsoft Support & Recovery Agent (SARA)](https://aka.ms/sara)
+[M365 Licensing Charts](https://m365maps.com/)
 
 [Microsoft Office Activation Troubleshooter](https://aka.ms/SARA-OfficeActivation-OF)
 
+[Microsoft Support & Recovery Agent (SARA)](https://aka.ms/sara)
+
+[Microsoft aka.ms sites (GitHub)](https://github.com/microsoft/aka)
+
+[Microsoft aka.ms sites search](https://akasearch.net/)
+
 [Office Removal Tool](https://aka.ms/SaRA-officeUninstallFromPC)
 
-[Sysinternals Live](https://live.sysinternals.com/)
-
 [Support and Recovery Assistant](https://aka.ms/sara)
+
+[Sysinternals Live](https://live.sysinternals.com/)
 
 [Update Catalog](https://www.catalog.update.microsoft.com/Home.aspx)
 
@@ -135,9 +132,9 @@
 
 [National Debt Clock](https://www.usdebtclock.org/)
 
-[This page](https://tony.support/tools)
-
 [OSINT Tools](https://start.me/p/L1rEYQ/osint4all)
+
+[This page](https://tony.support/tools)
 
 
 
@@ -153,7 +150,9 @@
 
 
 
-## Privacy
+## Privacy & Data Breaches
+
+[Leaked password lookup](https://haveibeenpwned.com/)
 
 [Personal privacy checklist](https://digital-defense.io/)
 
@@ -179,15 +178,15 @@
 
 ## Support Tools
 
-[Show public IP](https://ifconfig.me/ip)
-
+[Chris Titus Winutil](https://github.com/ChrisTitusTech/winutil)
+    
+	irm https://christitus.com/win | iex
+	
 [Connector Pinouts](https://pinoutguide.com/)
 
-[Chris Titus Winutil](https://github.com/ChrisTitusTech/winutil)
-
-    irm https://christitus.com/win | iex
-
 [Get browser info & other info](https://www.whatismybrowser.com/?recipientname=Browser+Report&recipientemail=browserreports@tigerguppy.com#send-to-tech)
+
+[Show public IP](https://ifconfig.me/ip)
 
 [Splashtop SOS (one time remote support)](https://tony.support/help)
 
