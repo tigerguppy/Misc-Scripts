@@ -1,11 +1,11 @@
 function Get-SystemShutdownHistory {
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory=$true)]
         [int]$Days
     )
 
     $startTime = (Get-Date).AddDays(-$Days)
-    $eventIDs = @(41, 1074, 6005, 6006, 6008)
+    $eventIDs = @(41, 6005, 6006, 6008, 1074)
 
     Write-Output "Querying shutdown/reboot events for the last $Days day(s)...`n"
 
@@ -13,94 +13,100 @@ function Get-SystemShutdownHistory {
     $events = $events | Sort-Object TimeGenerated
 
     foreach ($event in $events) {
-        $reason = ''
-        $details = ''
+        $reason = ""
+        $details = @{}
 
         switch ($event.EventID) {
             41 {
-                $reason = 'Kernel-Power: Crash or unexpected power loss'
-                if ($event.Message -match 'BugcheckCode\s*:\s*(\d+)') {
-                    $bugcheck = $matches[1]
+                $reason = "Kernel-Power: Crash or unexpected power loss"
+                if ($event.Message -match "BugcheckCode\s*:\s*(\d+)") {
+                    $details["BugcheckCode"] = $matches[1]
                 } else {
-                    $bugcheck = 'Unknown'
+                    $details["BugcheckCode"] = "Unknown"
                 }
-                if ($event.Message -match 'PowerButtonTimestamp\s*:\s*(\d+)') {
-                    $pwrButton = $matches[1]
+                if ($event.Message -match "PowerButtonTimestamp\s*:\s*(\d+)") {
+                    $details["PowerButtonTimestamp"] = $matches[1]
                 } else {
-                    $pwrButton = 'Unknown'
+                    $details["PowerButtonTimestamp"] = "Unknown"
                 }
-                $details = "BugcheckCode: $bugcheck | PowerButtonTimestamp: $pwrButton"
             }
 
             6005 {
-                $reason = 'System Startup (Event Log Service Started)'
+                $reason = "System Startup (Event Log Service Started)"
             }
 
             6006 {
-                $reason = 'Clean Shutdown (Event Log Service Stopped)'
+                $reason = "Clean Shutdown (Event Log Service Stopped)"
             }
 
             6008 {
-                $reason = 'Unexpected Shutdown'
-                if ($event.Message -match 'Previous shutdown at (.+?) on') {
-                    $shutdownTime = $matches[1]
+                $reason = "Unexpected Shutdown"
+                if ($event.Message -match "Previous shutdown at (.+?) on") {
+                    $details["PreviousShutdownAt"] = $matches[1]
                 } else {
-                    $shutdownTime = 'Unknown'
+                    $details["PreviousShutdownAt"] = "Unknown"
                 }
-                $details = "Previous shutdown at: $shutdownTime"
             }
 
             1074 {
-                $reason = 'Planned Shutdown/Restart'
+                $reason = "Planned Shutdown/Restart"
 
-                if ($event.Message -match 'The process (.+?) \(') {
-                    $process = $matches[1].Trim()
+                if ($event.Message -match "The process (.+?) \(") {
+                    $details["Process"] = $matches[1].Trim()
                 } else {
-                    $process = 'Unknown'
+                    $details["Process"] = "Unknown"
                 }
 
-                if ($event.Message -match 'on behalf of user (.+?) for the following reason') {
-                    $user = $matches[1].Trim()
+                if ($event.Message -match "on behalf of user (.+?) for the following reason") {
+                    $details["User"] = $matches[1].Trim()
                 } else {
-                    $user = 'Unknown'
+                    $details["User"] = "Unknown"
                 }
 
-                if ($event.Message -match 'for the following reason: (.+?)\s*(Reason Code|Shutdown Type|Comment|$)') {
-                    $shutdownReason = $matches[1].Trim()
+                if ($event.Message -match "for the following reason: (.+?)\s*(Reason Code|Shutdown Type|Comment|$)") {
+                    $details["Reason"] = $matches[1].Trim()
                 } else {
-                    $shutdownReason = 'Unknown'
+                    $details["Reason"] = "Unknown"
                 }
 
-                if ($event.Message -match 'Reason Code:\s+(.+?)\s*(Shutdown Type|Comment|$)') {
-                    $reasonCode = $matches[1].Trim()
+                if ($event.Message -match "Reason Code:\s+(.+?)\s*(Shutdown Type|Comment|$)") {
+                    $details["ReasonCode"] = $matches[1].Trim()
                 } else {
-                    $reasonCode = 'Unknown'
+                    $details["ReasonCode"] = "Unknown"
                 }
 
-                if ($event.Message -match 'Shutdown Type:\s+(.+?)\s*(Comment|$)') {
-                    $shutdownType = $matches[1].Trim()
+                if ($event.Message -match "Shutdown Type:\s+(.+?)\s*(Comment|$)") {
+                    $details["ShutdownType"] = $matches[1].Trim()
                 } else {
-                    $shutdownType = 'Unknown'
+                    $details["ShutdownType"] = "Unknown"
                 }
 
-                if ($event.Message -match 'Comment:\s*(.*)') {
-                    $comment = $matches[1].Trim()
+                if ($event.Message -match "Comment:\s*(.*)") {
+                    $details["Comment"] = $matches[1].Trim()
                 } else {
-                    $comment = ''
+                    $details["Comment"] = ""
                 }
-
-                $details = "Process: $process | User: $user | Reason: $shutdownReason | ReasonCode: $reasonCode | Type: $shutdownType | Comment: $comment"
             }
 
             default {
-                $reason = 'Other'
+                $reason = "Other"
             }
         }
 
-        if ($details) {
-            Write-Output ('{0} | EventID {1} | {2} | {3}' -f $event.TimeGenerated, $event.EventID, $reason, $details)
-        } else {
-            Write-Output ('{0} | EventID {1} | {2}' -f $event.TimeGenerated, $event.EventID, $reason)
+        # Output formatting
+        Write-Output ("Time: {0}" -f $event.TimeGenerated)
+        Write-Output ("EventID: {0}" -f $event.EventID)
+        Write-Output ("Type: {0}" -f $reason)
+
+        foreach ($key in $details.Keys) {
+            Write-Output ("{0}: {1}" -f $key, $details[$key])
         }
+
+        Write-Output "`n--------------------------------------`n"
     }
 }
+
+Get-SystemShutdownHistory -Days 30
+
+Read-Host "Press Enter to Exit"
+exit
