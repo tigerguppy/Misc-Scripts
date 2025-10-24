@@ -1,3 +1,5 @@
+# Note, this script can be dangerous to run and is not fully completed yet. Make sure you have a solid backup in case it fails or does more than you anticipated.
+
 <#
 .SYNOPSIS
     Comprehensive Windows troubleshooting and repair script.
