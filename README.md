@@ -82,8 +82,6 @@
 
 [ICANN Whois search](https://lookup.icann.org/en/lookup)
 
-[QR Code Reader](https://scanqr.org/)
-
 [Redirect checker](https://wheregoes.com/)
 
 [URL Cleaner, removes garbage from URL](https://linkcleaner.app)
@@ -125,6 +123,8 @@
 
 
 ## Misc. / Random links
+
+[QR Code Reader](https://scanqr.org/)
 
 [GitHub formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax/)
 
